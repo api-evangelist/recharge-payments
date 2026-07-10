@@ -1,0 +1,130 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Recharge
+providerId: recharge-payments
+created: '2026-07-10'
+modified: '2026-07-10'
+reconciled: false
+tags:
+- Subscriptions
+- Recurring Billing
+- E-commerce
+- Payments
+- Plans
+description: >-
+  Recharge is sold as a merchant SaaS subscription, not as a metered API product.
+  Pricing combines a fixed monthly platform fee with a per-transaction fee charged
+  on each subscription order Recharge processes. Published tiers are Starter,
+  Plus (labeled "Most popular"), and Custom. The REST API is included with a paid
+  Recharge plan at no additional per-call charge; higher tiers include higher API
+  rate limits. Numbers below reflect Recharge's public pricing page as of the
+  review date and should be re-verified during reconciliation.
+notes: >-
+  The API itself is not separately metered - cost is driven by the monthly plan
+  fee plus per-order transaction fees on processed subscription orders. Payment
+  processing fees from the underlying gateway (e.g. Shopify Payments, Stripe) are
+  separate and not included here. Verify current rates at getrecharge.com/pricing.
+sources:
+- https://getrecharge.com/pricing/
+- https://support.getrecharge.com/hc/en-us/articles/360008682914-Recharge-billing-and-pricing
+- https://developer.rechargepayments.com/2021-11
+plans:
+- id: recharge-starter
+  name: Starter
+  type: paid
+  description: >-
+    Entry tier for emerging brands launching a subscription program. Includes core
+    subscription management, the customer portal, churn prevention, failed-payment
+    recovery, win-back flows, automated workflows, analytics, and full REST API
+    access.
+  entries:
+  - label: Monthly Platform Fee
+    name: monthly_platform_fee
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: USD 99.00 per month
+    userMultiplied: false
+  - label: Transaction Fee
+    name: transaction_fee
+    type: usage
+    metric: orders
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 1.49% + USD 0.19 per subscription order
+    userMultiplied: false
+  elements:
+  - name: Subscription Management
+  - name: Customer Portal
+  - name: Churn Prevention and Failed Payment Recovery
+  - name: Automated Workflows and Analytics
+  - name: REST API Access
+- id: recharge-plus
+  name: Plus
+  type: paid
+  description: >-
+    Growth tier for scaling brands, labeled "Most popular." Adds hands-on
+    implementation and migration support, customizable bundles, Concierge SMS,
+    loyalty rewards and referral programs, JavaScript SDK access, and higher API
+    rate limits, with scalable processing rates for growth.
+  entries:
+  - label: Monthly Platform Fee
+    name: monthly_platform_fee
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: USD 499.00 per month
+    userMultiplied: false
+  - label: Transaction Fee
+    name: transaction_fee
+    type: usage
+    metric: orders
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 1.34% + USD 0.19 per order (scalable with growth)
+    userMultiplied: false
+  elements:
+  - name: Everything in Starter
+  - name: Implementation and Migration Support
+  - name: Customizable Bundles
+  - name: Loyalty Rewards and Referrals
+  - name: JavaScript SDK Access
+  - name: Higher API Rate Limits
+- id: recharge-custom
+  name: Custom
+  type: enterprise
+  description: >-
+    Volume-based tier for high-volume subscription brands focused on subscriber
+    retention. Adds custom implementations, dedicated priority technical support,
+    solution architecture review, and enterprise business reviews. Rates are
+    negotiated - contact Recharge sales.
+  entries:
+  - label: Custom Agreement
+    name: custom_agreement
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (volume-based rates)
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Dedicated Priority Support
+  - name: Solution Architecture Review
+  - name: Enterprise Business Reviews
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

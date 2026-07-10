@@ -1,0 +1,180 @@
+aid: recharge-payments
+url: https://raw.githubusercontent.com/api-evangelist/recharge-payments/refs/heads/main/apis.yml
+name: Recharge
+kind: company
+description: Recharge (Recharge Payments) is a subscription and recurring-billing
+  platform for e-commerce, most widely used on Shopify. Its public REST API at
+  https://api.rechargeapps.com lets developers manage the full subscription
+  lifecycle - subscriptions, customers, addresses, charges, orders, products,
+  payment methods, onetimes, discounts, and webhooks - programmatically. Requests
+  are authenticated with a store API token in the X-Recharge-Access-Token header
+  and versioned via the X-Recharge-Version header (supported versions 2021-11 and
+  2021-01). The API is resource-oriented JSON over HTTPS with cursor-based
+  pagination and a leaky-bucket rate limiter.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Subscriptions
+- Recurring Billing
+- E-commerce
+- Payments
+- Shopify
+- Retention
+created: '2026-07-10'
+modified: '2026-07-10'
+specificationVersion: '0.19'
+apis:
+- aid: recharge-payments:recharge-payments-subscriptions-api
+  name: Recharge Subscriptions API
+  tags:
+  - Subscriptions
+  - Recurring Billing
+  - Lifecycle
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.rechargepayments.com/2021-11/subscriptions
+  baseURL: https://api.rechargeapps.com
+  properties:
+  - url: https://developer.rechargepayments.com/2021-11
+    type: Documentation
+  - url: https://developer.rechargepayments.com/2021-11/subscriptions
+    type: APIReference
+  - url: openapi/recharge-payments-openapi.yml
+    type: OpenAPI
+  - url: collections/recharge-payments.postman_collection.json
+    type: PostmanCollection
+  - url: collections/recharge-payments.opencollection.json
+    type: OpenCollection
+  description: Create, list, retrieve, update, and delete recurring subscriptions,
+    and drive the subscription lifecycle with action endpoints - change the next
+    charge date, change address, cancel, and activate. Subscriptions define product,
+    quantity, price, and order interval, and schedule the charges that generate
+    future orders.
+- aid: recharge-payments:recharge-payments-customers-api
+  name: Recharge Customers API
+  tags:
+  - Customers
+  - Accounts
+  - Delivery Schedule
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.rechargepayments.com/2021-11/customers
+  baseURL: https://api.rechargeapps.com
+  properties:
+  - url: https://developer.rechargepayments.com/2021-11/customers
+    type: APIReference
+  - url: openapi/recharge-payments-openapi.yml
+    type: OpenAPI
+  - url: collections/recharge-payments.postman_collection.json
+    type: PostmanCollection
+  - url: collections/recharge-payments.opencollection.json
+    type: OpenCollection
+  description: Manage customer records that own addresses, subscriptions, and payment
+    methods - create, list, retrieve, update, and delete customers, and read a
+    customer's upcoming delivery schedule and credit summary. Customers link Recharge
+    records to the underlying store's external customer identifier.
+- aid: recharge-payments:recharge-payments-orders-api
+  name: Recharge Orders API
+  tags:
+  - Orders
+  - Fulfillment
+  - Recurring
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.rechargepayments.com/2021-11/orders
+  baseURL: https://api.rechargeapps.com
+  properties:
+  - url: https://developer.rechargepayments.com/2021-11/orders
+    type: APIReference
+  - url: openapi/recharge-payments-openapi.yml
+    type: OpenAPI
+  - url: collections/recharge-payments.postman_collection.json
+    type: PostmanCollection
+  - url: collections/recharge-payments.opencollection.json
+    type: OpenCollection
+  description: List, retrieve, update, and delete orders generated from charges, plus
+    RPC-style actions to clone an order or delay it. Orders represent the concrete
+    fulfillment record that flows to the connected storefront after a charge
+    processes successfully.
+- aid: recharge-payments:recharge-payments-charges-api
+  name: Recharge Charges API
+  tags:
+  - Charges
+  - Billing
+  - Payments
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.rechargepayments.com/2021-11/charges
+  baseURL: https://api.rechargeapps.com
+  properties:
+  - url: https://developer.rechargepayments.com/2021-11/charges
+    type: APIReference
+  - url: openapi/recharge-payments-openapi.yml
+    type: OpenAPI
+  - url: collections/recharge-payments.postman_collection.json
+    type: PostmanCollection
+  - url: collections/recharge-payments.opencollection.json
+    type: OpenCollection
+  description: List and retrieve scheduled and processed charges, and act on queued
+    charges - skip, unskip, process now, refund, and apply or remove a discount.
+    Charges are the billing events that draw against a customer's payment method and
+    produce orders on success.
+- aid: recharge-payments:recharge-payments-products-api
+  name: Recharge Products API
+  tags:
+  - Products
+  - Catalog
+  - Subscription Rules
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.rechargepayments.com/2021-11/products
+  baseURL: https://api.rechargeapps.com
+  properties:
+  - url: https://developer.rechargepayments.com/2021-11/products
+    type: APIReference
+  - url: openapi/recharge-payments-openapi.yml
+    type: OpenAPI
+  - url: collections/recharge-payments.postman_collection.json
+    type: PostmanCollection
+  - url: collections/recharge-payments.opencollection.json
+    type: OpenCollection
+  description: Create, list, retrieve, update, and delete products and their
+    subscription defaults - the discount, order-interval, and cutoff rules that
+    govern how a storefront product can be subscribed to. Products map to the
+    connected store's external product identifiers.
+- aid: recharge-payments:recharge-payments-webhooks-api
+  name: Recharge Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.rechargepayments.com/2021-11/webhooks_endpoints
+  baseURL: https://api.rechargeapps.com
+  properties:
+  - url: https://developer.rechargepayments.com/2021-11/webhooks_endpoints
+    type: APIReference
+  - url: openapi/recharge-payments-openapi.yml
+    type: OpenAPI
+  - url: collections/recharge-payments.postman_collection.json
+    type: PostmanCollection
+  - url: collections/recharge-payments.opencollection.json
+    type: OpenCollection
+  description: Register, list, retrieve, update, delete, and test webhook endpoints
+    that receive event notifications - for topics such as subscription, charge,
+    order, and customer changes - via server-to-endpoint HTTPS POST. Webhooks are
+    Recharge's push mechanism; there is no public WebSocket surface.
+common:
+- type: GitHubOrganization
+  url: https://github.com/ReChargePayments
+- type: LinkedIn
+  url: https://www.linkedin.com/company/rechargepayments
+- type: Website
+  url: https://getrecharge.com
+- type: Documentation
+  url: https://developer.rechargepayments.com
+- type: Plans
+  url: plans/recharge-payments-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/recharge-payments-rate-limits.yml
+- type: FinOps
+  url: finops/recharge-payments-finops.yml
+- url: https://getrecharge.com/blog/
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

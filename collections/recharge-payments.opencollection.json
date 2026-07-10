@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Recharge API",
+    "version": "2021-11"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "X-Recharge-Access-Token",
+        "value": "{{accessToken}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Subscriptions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List subscriptions.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.rechargeapps.com/subscriptions" },
+          "docs": "Retrieves a list of subscriptions."
+        },
+        {
+          "info": { "name": "Create a subscription.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/subscriptions",
+            "body": { "type": "json", "data": "{\n  \"address_id\": 0,\n  \"next_charge_scheduled_at\": \"2026-08-01\",\n  \"order_interval_frequency\": \"1\",\n  \"order_interval_unit\": \"month\",\n  \"quantity\": 1,\n  \"external_product_id\": {},\n  \"external_variant_id\": {}\n}" }
+          },
+          "docs": "Creates a new subscription for a customer address."
+        },
+        {
+          "info": { "name": "Retrieve a subscription.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/subscriptions/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The subscription ID." } ]
+          },
+          "docs": "Retrieves a subscription by ID."
+        },
+        {
+          "info": { "name": "Update a subscription.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rechargeapps.com/subscriptions/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The subscription ID." } ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates an existing subscription."
+        },
+        {
+          "info": { "name": "Cancel a subscription.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/subscriptions/:id/cancel",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The subscription ID." } ],
+            "body": { "type": "json", "data": "{\n  \"cancellation_reason\": \"Too expensive\"\n}" }
+          },
+          "docs": "Cancels an active subscription."
+        },
+        {
+          "info": { "name": "Change next charge date.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/subscriptions/:id/change_next_charge_date",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The subscription ID." } ],
+            "body": { "type": "json", "data": "{\n  \"date\": \"2026-09-01\"\n}" }
+          },
+          "docs": "Sets the date of the next scheduled charge."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Customers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List customers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.rechargeapps.com/customers" },
+          "docs": "Retrieves a list of customers."
+        },
+        {
+          "info": { "name": "Retrieve a customer.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/customers/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The customer ID." } ]
+          },
+          "docs": "Retrieves a customer by ID."
+        },
+        {
+          "info": { "name": "Retrieve a customer delivery schedule.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/customers/:id/delivery_schedule",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The customer ID." } ]
+          },
+          "docs": "Returns the upcoming deliveries scheduled for a customer."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Charges", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List charges.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.rechargeapps.com/charges" },
+          "docs": "Retrieves a list of charges."
+        },
+        {
+          "info": { "name": "Skip a charge.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/charges/:id/skip",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The charge ID." } ],
+            "body": { "type": "json", "data": "{\n  \"purchase_item_ids\": []\n}" }
+          },
+          "docs": "Skips a queued charge so it will not process on its scheduled date."
+        },
+        {
+          "info": { "name": "Process a charge.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/charges/:id/process",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The charge ID." } ]
+          },
+          "docs": "Attempts to process a queued charge immediately."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Orders", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List orders.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.rechargeapps.com/orders" },
+          "docs": "Retrieves a list of orders."
+        },
+        {
+          "info": { "name": "Retrieve an order.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/orders/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The order ID." } ]
+          },
+          "docs": "Retrieves an order by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Products", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List products.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.rechargeapps.com/products" },
+          "docs": "Retrieves a list of products and their subscription defaults."
+        },
+        {
+          "info": { "name": "Retrieve a product.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/products/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The product ID." } ]
+          },
+          "docs": "Retrieves a product by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List webhook endpoints.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.rechargeapps.com/webhooks" },
+          "docs": "Retrieves a list of registered webhook endpoints."
+        },
+        {
+          "info": { "name": "Create a webhook endpoint.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/webhooks",
+            "body": { "type": "json", "data": "{\n  \"address\": \"https://example.com/webhooks/recharge\",\n  \"topic\": \"subscription/created\"\n}" }
+          },
+          "docs": "Registers a URL to receive event notifications for a topic."
+        },
+        {
+          "info": { "name": "Test a webhook endpoint.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/webhooks/:id/test",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The webhook endpoint ID." } ]
+          },
+          "docs": "Sends a test notification to the configured webhook URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

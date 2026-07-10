@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Recharge
+providerId: recharge-payments
+created: '2026-07-10'
+modified: '2026-07-10'
+reconciled: false
+tags:
+- Subscriptions
+- Recurring Billing
+- E-commerce
+- Payments
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Recharge spend. Recharge bills merchants as a SaaS subscription:
+  a fixed monthly platform fee per plan tier (Starter, Plus, Custom) plus a
+  per-transaction fee on each subscription order processed (a percentage of order
+  value plus a fixed per-order amount). The REST API carries no separate metered
+  charge - API usage is included with a paid plan - so API cost is effectively
+  bundled into the platform fee, while the variable cost driver is the volume of
+  processed subscription orders. Underlying payment-gateway processing fees are
+  billed separately by the gateway and are out of scope here.
+notes: >-
+  Per-unit rates (monthly fee, transaction percentage, per-order fixed fee) are
+  set by plan tier and should be verified on the Recharge pricing page during
+  reconciliation. The dominant, most controllable cost is the per-order
+  transaction fee, which scales directly with processed subscription order volume.
+sources:
+- https://getrecharge.com/pricing/
+- https://support.getrecharge.com/hc/en-us/articles/360008682914-Recharge-billing-and-pricing
+- https://developer.rechargepayments.com/2021-11
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Recharge
+serviceCategory: E-commerce and Subscription Billing
+billingModel:
+  pricingCategory: Subscription-Plus-Usage
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Recharge Subscriptions
+  ServiceCategory: E-commerce and Subscription Billing
+  ProviderName: Recharge
+  PublisherName: Recharge
+  InvoiceIssuerName: Recharge
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription-Plus-Usage
+meters:
+- name: monthly_platform_fee
+  description: Fixed monthly Recharge plan fee (Starter, Plus, or Custom).
+  unit: months
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: transaction_fee
+  description: Per-subscription-order fee (percentage of order value plus fixed per-order amount).
+  unit: orders
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: sms_usage
+  description: Concierge SMS messages sent on higher tiers, billed per message.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track processed subscription order volume and its per-order transaction fees separately from the fixed monthly platform fee, and separately from underlying gateway processing fees.
+- name: Allocation
+  description: Map transaction fees to store, product line, or subscription cohort so recurring-revenue cost of processing is attributable.
+- name: Optimization
+  description: Reduce churn and failed-payment retries to keep processed-order fees productive; evaluate tier upgrades where percentage rate reductions offset the higher monthly fee at your order volume.
+- name: Accountability
+  description: Assign an owner for the Recharge plan tier decision and review monthly platform-fee plus transaction-fee spend against subscription revenue each billing cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

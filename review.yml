@@ -1,0 +1,114 @@
+aid: recharge-payments
+name: Recharge
+review:
+  question: Does Recharge expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-10'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Recharge's entire documented public
+    surface is request/response REST over HTTPS at https://api.rechargeapps.com,
+    plus outbound webhooks (server-to-endpoint HTTPS POST). There is no
+    server-push transport (WebSocket or SSE) on Recharge's own API to model.
+    Recharge's near-real-time notifications are delivered by POSTing event
+    payloads to merchant-registered webhook endpoints; those are one-directional
+    HTTP callbacks, not a persistent socket, and are already represented as the
+    Webhooks API rather than as an AsyncAPI channel.
+findings:
+  summary: |
+    Recharge does not publish a documented public WebSocket API. Recharge
+    (Recharge Payments) is a subscription and recurring-billing platform for
+    e-commerce. Its public API is a versioned REST API at
+    https://api.rechargeapps.com, authenticated with a store API token in the
+    X-Recharge-Access-Token header and versioned with the X-Recharge-Version
+    header (supported versions 2021-11 and 2021-01). Every documented resource -
+    subscriptions, customers, addresses, charges, orders, products, payment
+    methods, onetimes, discounts, checkouts, metafields, and webhook endpoints -
+    is accessed via standard HTTP verbs returning JSON. Event delivery is handled
+    by outbound webhooks that POST to a merchant-registered URL. No realtime,
+    bidirectional, or streaming WebSocket (ws:// or wss://) endpoint is documented
+    anywhere in Recharge's developer reference as of the review date.
+  accessModel: |
+    Access to the Recharge API requires a Recharge merchant account (typically
+    connected to a Shopify, BigCommerce, or custom store). API tokens are
+    generated per store in the merchant portal under Apps and integrations, and
+    scoped to specific resource permissions. Partner/public apps use OAuth to
+    obtain per-store tokens. The API is not an open, anonymous API - a paid
+    Recharge plan and a store token are required - but the reference
+    documentation is fully public.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.rechargeapps.com
+      documented: true
+      note: The complete public API. Token auth via X-Recharge-Access-Token; version via X-Recharge-Version.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound event notifications POSTed to a merchant-registered endpoint. One-directional HTTP callback, not a socket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Recharge developer reference as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.rechargeapps.com/subscriptions
+    - POST   https://api.rechargeapps.com/subscriptions
+    - GET    https://api.rechargeapps.com/subscriptions/{id}
+    - PUT    https://api.rechargeapps.com/subscriptions/{id}
+    - DELETE https://api.rechargeapps.com/subscriptions/{id}
+    - POST   https://api.rechargeapps.com/subscriptions/{id}/change_next_charge_date
+    - POST   https://api.rechargeapps.com/subscriptions/{id}/cancel
+    - POST   https://api.rechargeapps.com/subscriptions/{id}/activate
+    - GET    https://api.rechargeapps.com/customers
+    - POST   https://api.rechargeapps.com/customers
+    - GET    https://api.rechargeapps.com/customers/{id}
+    - PUT    https://api.rechargeapps.com/customers/{id}
+    - DELETE https://api.rechargeapps.com/customers/{id}
+    - GET    https://api.rechargeapps.com/customers/{id}/delivery_schedule
+    - GET    https://api.rechargeapps.com/orders
+    - GET    https://api.rechargeapps.com/orders/{id}
+    - PUT    https://api.rechargeapps.com/orders/{id}
+    - POST   https://api.rechargeapps.com/orders/{id}/clone
+    - POST   https://api.rechargeapps.com/orders/{id}/delay
+    - GET    https://api.rechargeapps.com/charges
+    - GET    https://api.rechargeapps.com/charges/{id}
+    - POST   https://api.rechargeapps.com/charges/{id}/skip
+    - POST   https://api.rechargeapps.com/charges/{id}/unskip
+    - POST   https://api.rechargeapps.com/charges/{id}/process
+    - POST   https://api.rechargeapps.com/charges/{id}/refund
+    - GET    https://api.rechargeapps.com/products
+    - POST   https://api.rechargeapps.com/products
+    - GET    https://api.rechargeapps.com/products/{id}
+    - GET    https://api.rechargeapps.com/addresses
+    - GET    https://api.rechargeapps.com/payment_methods
+    - GET    https://api.rechargeapps.com/onetimes
+    - GET    https://api.rechargeapps.com/discounts
+    - GET    https://api.rechargeapps.com/webhooks
+    - POST   https://api.rechargeapps.com/webhooks
+    - POST   https://api.rechargeapps.com/webhooks/{id}/test
+sources:
+  - url: https://developer.rechargepayments.com/2021-11
+    type: Documentation
+    note: API introduction - base URL api.rechargeapps.com, token auth, versioning. All REST. No WebSocket mentioned.
+  - url: https://developer.rechargepayments.com/2021-11/subscriptions
+    type: APIReference
+    note: Subscription CRUD plus lifecycle action endpoints (cancel, activate, change_next_charge_date).
+  - url: https://developer.rechargepayments.com/2021-11/webhooks_endpoints
+    type: APIReference
+    note: Webhook endpoint CRUD and test - outbound HTTPS POST notifications, not a socket.
+  - url: https://docs.getrecharge.com/docs/endpoints
+    type: Documentation
+    note: Full resource list - Addresses, Charges, Checkouts, Customers, Discounts, Metafields, Onetimes, Orders, Payments, Products, Subscriptions, Webhooks, Async batches.
+  - url: https://docs.getrecharge.com/docs/api-rate-limits
+    type: Documentation
+    note: Leaky-bucket rate limiter - bucket of 40, leaking 2 requests/second; 429 on overflow.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Recharge's public API is
+    request/response REST plus outbound webhooks. No AsyncAPI document was
+    created because there is no server-push socket transport on Recharge's own
+    API to model; webhook delivery is already represented as the Webhooks REST
+    API in apis.yml.

@@ -1,0 +1,64 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Recharge
+providerId: recharge-payments
+created: '2026-07-10'
+modified: '2026-07-10'
+reconciled: false
+tags:
+- Subscriptions
+- Recurring Billing
+- E-commerce
+- Rate Limiting
+- Quotas
+description: >-
+  The Recharge API is throttled with a leaky-bucket algorithm. Each store token
+  has a bucket that holds up to 40 requests and leaks (empties) at 2 requests per
+  second. A steady rate of 2 requests/second will never trip a limit; short bursts
+  up to the bucket size of 40 are allowed and then refill at 2/second. When the
+  bucket overflows, the API responds with HTTP 429; the guidance is to sleep at
+  least 2 seconds and retry. Higher Recharge plan tiers (Plus, Custom) may be
+  granted higher API rate limits.
+notes: >-
+  Numbers reflect Recharge's published rate-limit documentation - a 40-request
+  bucket leaking 2 per second (roughly 120 sustained requests/minute, up to ~160
+  with perfectly timed bursts). Confirm any elevated limits granted on higher
+  tiers with Recharge. Async batch endpoints exist for large bulk operations to
+  avoid hammering the standard endpoints.
+sources:
+- https://docs.getrecharge.com/docs/api-rate-limits
+- https://developer.rechargepayments.com/2021-11
+responseCodes:
+  throttled: 429
+limits:
+- name: Leaky Bucket Capacity
+  scope: token
+  metric: requests
+  limit: 40 requests (bucket size)
+  notes: Maximum number of requests that can be in the bucket at any one instant.
+- name: Leak Rate
+  scope: token
+  metric: requests
+  limit: 2 requests per second
+  notes: The rate at which the bucket empties; a steady 2 req/sec never trips a 429.
+- name: Sustained Throughput
+  scope: token
+  metric: requests
+  limit: ~120 requests per minute sustained
+  notes: 2 requests/second averaged over time; bursts up to 40 are absorbed by the bucket.
+- name: Elevated Tier Limits
+  scope: account
+  metric: requests
+  limit: higher on Plus / Custom
+  notes: Higher Recharge plan tiers may be granted higher API rate limits; confirm with Recharge.
+policies:
+- name: Backoff Strategy
+  description: On a 429 response, sleep for at least 2 seconds before retrying; implement exponential backoff with jitter for repeated overflows.
+- name: Bucket Refill
+  description: Available request budget increases by 2 for every second in which no request is made, up to the bucket size of 40.
+- name: Bulk Operations
+  description: Use the async batch endpoints for large create/update workloads rather than issuing many individual requests against the standard endpoints.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

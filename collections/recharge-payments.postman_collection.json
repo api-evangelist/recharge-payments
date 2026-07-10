@@ -1,0 +1,247 @@
+{
+  "info": {
+    "name": "Recharge API",
+    "description": "The Recharge (Recharge Payments) subscription and recurring-billing REST API. Base URL: https://api.rechargeapps.com. All requests are authenticated with a store API token in the X-Recharge-Access-Token header and versioned via the X-Recharge-Version header (2021-11 recommended). See developer.rechargepayments.com for the full reference.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "X-Recharge-Access-Token", "type": "string" },
+      { "key": "value", "value": "{{accessToken}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.rechargeapps.com", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" },
+    { "key": "apiVersion", "value": "2021-11", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Subscriptions",
+      "item": [
+        {
+          "name": "List subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/subscriptions", "host": ["{{baseUrl}}"], "path": ["subscriptions"] },
+            "description": "Retrieves a list of subscriptions."
+          }
+        },
+        {
+          "name": "Create a subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Recharge-Version", "value": "{{apiVersion}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"address_id\": 0,\n  \"next_charge_scheduled_at\": \"2026-08-01\",\n  \"order_interval_frequency\": \"1\",\n  \"order_interval_unit\": \"month\",\n  \"quantity\": 1,\n  \"external_product_id\": {},\n  \"external_variant_id\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/subscriptions", "host": ["{{baseUrl}}"], "path": ["subscriptions"] },
+            "description": "Creates a new subscription for a customer address."
+          }
+        },
+        {
+          "name": "Retrieve a subscription",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a subscription by ID."
+          }
+        },
+        {
+          "name": "Update a subscription",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Recharge-Version", "value": "{{apiVersion}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Updates an existing subscription."
+          }
+        },
+        {
+          "name": "Cancel a subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Recharge-Version", "value": "{{apiVersion}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"cancellation_reason\": \"Too expensive\"\n}" },
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id/cancel", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id", "cancel"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Cancels an active subscription."
+          }
+        },
+        {
+          "name": "Change next charge date",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Recharge-Version", "value": "{{apiVersion}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"date\": \"2026-09-01\"\n}" },
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id/change_next_charge_date", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id", "change_next_charge_date"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Sets the date of the next scheduled charge."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "List customers",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] },
+            "description": "Retrieves a list of customers."
+          }
+        },
+        {
+          "name": "Retrieve a customer",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/customers/:id", "host": ["{{baseUrl}}"], "path": ["customers", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a customer by ID."
+          }
+        },
+        {
+          "name": "Retrieve a customer delivery schedule",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/customers/:id/delivery_schedule", "host": ["{{baseUrl}}"], "path": ["customers", ":id", "delivery_schedule"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Returns the upcoming deliveries scheduled for a customer."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Charges",
+      "item": [
+        {
+          "name": "List charges",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/charges", "host": ["{{baseUrl}}"], "path": ["charges"] },
+            "description": "Retrieves a list of charges."
+          }
+        },
+        {
+          "name": "Skip a charge",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Recharge-Version", "value": "{{apiVersion}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"purchase_item_ids\": []\n}" },
+            "url": { "raw": "{{baseUrl}}/charges/:id/skip", "host": ["{{baseUrl}}"], "path": ["charges", ":id", "skip"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Skips a queued charge so it will not process on its scheduled date."
+          }
+        },
+        {
+          "name": "Process a charge",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/charges/:id/process", "host": ["{{baseUrl}}"], "path": ["charges", ":id", "process"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Attempts to process a queued charge immediately."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "List orders",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] },
+            "description": "Retrieves a list of orders."
+          }
+        },
+        {
+          "name": "Retrieve an order",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/orders/:id", "host": ["{{baseUrl}}"], "path": ["orders", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves an order by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] },
+            "description": "Retrieves a list of products and their subscription defaults."
+          }
+        },
+        {
+          "name": "Retrieve a product",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/products/:id", "host": ["{{baseUrl}}"], "path": ["products", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a product by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "List webhook endpoints",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": ["{{baseUrl}}"], "path": ["webhooks"] },
+            "description": "Retrieves a list of registered webhook endpoints."
+          }
+        },
+        {
+          "name": "Create a webhook endpoint",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Recharge-Version", "value": "{{apiVersion}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"address\": \"https://example.com/webhooks/recharge\",\n  \"topic\": \"subscription/created\"\n}" },
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": ["{{baseUrl}}"], "path": ["webhooks"] },
+            "description": "Registers a URL to receive event notifications for a topic."
+          }
+        },
+        {
+          "name": "Test a webhook endpoint",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "X-Recharge-Version", "value": "{{apiVersion}}" } ],
+            "url": { "raw": "{{baseUrl}}/webhooks/:id/test", "host": ["{{baseUrl}}"], "path": ["webhooks", ":id", "test"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Sends a test notification to the configured webhook URL."
+          }
+        }
+      ]
+    }
+  ]
+}
