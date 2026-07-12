@@ -159,6 +159,12 @@ apis:
     order, and customer changes - via server-to-endpoint HTTPS POST. Webhooks are
     Recharge's push mechanism; there is no public WebSocket surface.
 common:
+- type: TrustCenter
+  url: security/recharge-payments-trust-center.yml
+- type: DomainSecurity
+  url: security/recharge-payments-domain-security.yml
+- type: Authentication
+  url: authentication/recharge-payments-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/ReChargePayments
 - type: LinkedIn

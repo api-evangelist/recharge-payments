@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/recharge-payments-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiToken
+  type: apiKey
+  in: header
+  parameter: X-Recharge-Access-Token
+  description: Store API token generated in the Recharge merchant portal under Apps and integrations.
+  sources:
+  - openapi/recharge-payments-openapi.yml

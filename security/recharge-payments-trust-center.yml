@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://trust.getrecharge.com/
+url: https://trust.getrecharge.com/
+certifications:
+- SOC 2
+- PCI DSS
+- GDPR
+evidence:
+- source: https://trust.getrecharge.com/
+  keywords:
+  - soc 2
+  - pci dss
+  - trust center
+  - gdpr
