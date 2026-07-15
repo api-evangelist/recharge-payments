@@ -159,6 +159,8 @@ apis:
     order, and customer changes - via server-to-endpoint HTTPS POST. Webhooks are
     Recharge's push mechanism; there is no public WebSocket surface.
 common:
+- type: AgenticAccess
+  url: agentic-access/recharge-payments-agentic-access.yml
 - type: TrustCenter
   url: security/recharge-payments-trust-center.yml
 - type: DomainSecurity
