@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: Recharge Addresses Onetimes API
+  description: The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.
+  version: 2021-11
+  contact:
+    name: Recharge
+    url: https://developer.rechargepayments.com
+  termsOfService: https://getrecharge.com/legal
+servers:
+- url: https://api.rechargeapps.com
+  description: Recharge API
+security:
+- apiToken: []
+tags:
+- name: Onetimes
+  description: One-time (non-recurring) products added to an upcoming charge.
+paths:
+  /onetimes:
+    get:
+      operationId: listOnetimes
+      tags:
+      - Onetimes
+      summary: List onetimes
+      responses:
+        '200':
+          description: A list of one-time products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  onetimes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Onetime'
+    post:
+      operationId: createOnetime
+      tags:
+      - Onetimes
+      summary: Create a onetime
+      responses:
+        '201':
+          description: The created one-time product.
+  /onetimes/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getOnetime
+      tags:
+      - Onetimes
+      summary: Retrieve a onetime
+      responses:
+        '200':
+          description: The requested one-time product.
+    put:
+      operationId: updateOnetime
+      tags:
+      - Onetimes
+      summary: Update a onetime
+      responses:
+        '200':
+          description: The updated one-time product.
+    delete:
+      operationId: deleteOnetime
+      tags:
+      - Onetimes
+      summary: Delete a onetime
+      responses:
+        '204':
+          description: The one-time product was deleted.
+components:
+  schemas:
+    Onetime:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        address_id:
+          type: integer
+          format: int64
+        product_title:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: integer
+        next_charge_scheduled_at:
+          type: string
+          format: date
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: header
+      name: X-Recharge-Access-Token
+      description: Store API token generated in the Recharge merchant portal under Apps and integrations.

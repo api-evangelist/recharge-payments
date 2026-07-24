@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: Recharge Addresses Webhooks API
+  description: The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.
+  version: 2021-11
+  contact:
+    name: Recharge
+    url: https://developer.rechargepayments.com
+  termsOfService: https://getrecharge.com/legal
+servers:
+- url: https://api.rechargeapps.com
+  description: Recharge API
+security:
+- apiToken: []
+tags:
+- name: Webhooks
+  description: Webhook endpoints that receive event notifications from Recharge.
+paths:
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      tags:
+      - Webhooks
+      summary: List webhook endpoints
+      responses:
+        '200':
+          description: A list of webhook endpoints.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+    post:
+      operationId: createWebhook
+      tags:
+      - Webhooks
+      summary: Create a webhook endpoint
+      description: Registers a URL to receive event notifications for a set of topics.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+      responses:
+        '201':
+          description: The created webhook endpoint.
+  /webhooks/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getWebhook
+      tags:
+      - Webhooks
+      summary: Retrieve a webhook endpoint
+      responses:
+        '200':
+          description: The requested webhook endpoint.
+    put:
+      operationId: updateWebhook
+      tags:
+      - Webhooks
+      summary: Update a webhook endpoint
+      responses:
+        '200':
+          description: The updated webhook endpoint.
+    delete:
+      operationId: deleteWebhook
+      tags:
+      - Webhooks
+      summary: Delete a webhook endpoint
+      responses:
+        '204':
+          description: The webhook endpoint was deleted.
+  /webhooks/{id}/test:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    post:
+      operationId: testWebhook
+      tags:
+      - Webhooks
+      summary: Test a webhook endpoint
+      description: Sends a test notification to the configured webhook URL.
+      responses:
+        '200':
+          description: The test notification was sent.
+components:
+  schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        address:
+          type: string
+          format: uri
+        topic:
+          type: string
+          description: The event topic, e.g. subscription/created or charge/paid.
+        created_at:
+          type: string
+          format: date-time
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: header
+      name: X-Recharge-Access-Token
+      description: Store API token generated in the Recharge merchant portal under Apps and integrations.

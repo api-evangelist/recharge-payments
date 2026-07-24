@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: Recharge Addresses API
+  description: The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.
+  version: 2021-11
+  contact:
+    name: Recharge
+    url: https://developer.rechargepayments.com
+  termsOfService: https://getrecharge.com/legal
+servers:
+- url: https://api.rechargeapps.com
+  description: Recharge API
+security:
+- apiToken: []
+tags:
+- name: Addresses
+  description: Customer shipping addresses that group subscriptions and charges.
+paths:
+  /addresses:
+    get:
+      operationId: listAddresses
+      tags:
+      - Addresses
+      summary: List addresses
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of addresses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  addresses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Address'
+    post:
+      operationId: createAddress
+      tags:
+      - Addresses
+      summary: Create an address
+      responses:
+        '201':
+          description: The created address.
+  /addresses/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getAddress
+      tags:
+      - Addresses
+      summary: Retrieve an address
+      responses:
+        '200':
+          description: The requested address.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  address:
+                    $ref: '#/components/schemas/Address'
+    put:
+      operationId: updateAddress
+      tags:
+      - Addresses
+      summary: Update an address
+      responses:
+        '200':
+          description: The updated address.
+    delete:
+      operationId: deleteAddress
+      tags:
+      - Addresses
+      summary: Delete an address
+      responses:
+        '204':
+          description: The address was deleted.
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
+    PageCursor:
+      name: page_info
+      in: query
+      required: false
+      description: Cursor for cursor-based pagination, taken from the Link response header.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of results per page (default 50, max 250).
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+  schemas:
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip:
+          type: string
+        country_code:
+          type: string
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: header
+      name: X-Recharge-Access-Token
+      description: Store API token generated in the Recharge merchant portal under Apps and integrations.

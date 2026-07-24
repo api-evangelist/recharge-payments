@@ -1,0 +1,227 @@
+openapi: 3.0.3
+info:
+  title: Recharge Addresses Subscriptions API
+  description: The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.
+  version: 2021-11
+  contact:
+    name: Recharge
+    url: https://developer.rechargepayments.com
+  termsOfService: https://getrecharge.com/legal
+servers:
+- url: https://api.rechargeapps.com
+  description: Recharge API
+security:
+- apiToken: []
+tags:
+- name: Subscriptions
+  description: Recurring subscription lines that drive future charges and orders.
+paths:
+  /subscriptions:
+    get:
+      operationId: listSubscriptions
+      tags:
+      - Subscriptions
+      summary: List subscriptions
+      description: Retrieves a list of subscriptions, optionally filtered by customer, address, status, or product.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of subscriptions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: createSubscription
+      tags:
+      - Subscriptions
+      summary: Create a subscription
+      description: Creates a new subscription for a customer address and payment method.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '201':
+          description: The created subscription.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /subscriptions/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getSubscription
+      tags:
+      - Subscriptions
+      summary: Retrieve a subscription
+      responses:
+        '200':
+          description: The requested subscription.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: '#/components/schemas/Subscription'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateSubscription
+      tags:
+      - Subscriptions
+      summary: Update a subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '200':
+          description: The updated subscription.
+    delete:
+      operationId: deleteSubscription
+      tags:
+      - Subscriptions
+      summary: Delete a subscription
+      responses:
+        '204':
+          description: The subscription was deleted.
+  /subscriptions/{id}/change_next_charge_date:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    post:
+      operationId: changeNextChargeDate
+      tags:
+      - Subscriptions
+      summary: Change the next charge date
+      description: Sets the date of the next scheduled charge for a subscription.
+      responses:
+        '200':
+          description: The updated subscription.
+  /subscriptions/{id}/cancel:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    post:
+      operationId: cancelSubscription
+      tags:
+      - Subscriptions
+      summary: Cancel a subscription
+      responses:
+        '200':
+          description: The cancelled subscription.
+  /subscriptions/{id}/activate:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    post:
+      operationId: activateSubscription
+      tags:
+      - Subscriptions
+      summary: Activate a cancelled subscription
+      responses:
+        '200':
+          description: The activated subscription.
+components:
+  responses:
+    RateLimited:
+      description: Too many requests. Recharge uses a leaky-bucket rate limiter (bucket of 40 requests, leaking 2 per second). Retry after at least 2 seconds.
+    Unauthorized:
+      description: The API token is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
+    PageCursor:
+      name: page_info
+      in: query
+      required: false
+      description: Cursor for cursor-based pagination, taken from the Link response header.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of results per page (default 50, max 250).
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        address_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - active
+          - cancelled
+          - expired
+        product_title:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: string
+        next_charge_scheduled_at:
+          type: string
+          format: date
+        order_interval_unit:
+          type: string
+          enum:
+          - day
+          - week
+          - month
+        order_interval_frequency:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: header
+      name: X-Recharge-Access-Token
+      description: Store API token generated in the Recharge merchant portal under Apps and integrations.
