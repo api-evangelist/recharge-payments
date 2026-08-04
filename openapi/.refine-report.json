@@ -1,0 +1,32 @@
+{
+  "provider": "recharge-payments",
+  "sources": [
+    "recharge-payments-addresses-api-openapi.yml",
+    "recharge-payments-charges-api-openapi.yml",
+    "recharge-payments-customers-api-openapi.yml",
+    "recharge-payments-discounts-api-openapi.yml",
+    "recharge-payments-onetimes-api-openapi.yml",
+    "recharge-payments-orders-api-openapi.yml",
+    "recharge-payments-payment-methods-api-openapi.yml",
+    "recharge-payments-products-api-openapi.yml",
+    "recharge-payments-subscriptions-api-openapi.yml",
+    "recharge-payments-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "recharge-payments-addresses-api-openapi.yml",
+    "recharge-payments-charges-api-openapi.yml",
+    "recharge-payments-customers-api-openapi.yml",
+    "recharge-payments-discounts-api-openapi.yml",
+    "recharge-payments-onetimes-api-openapi.yml",
+    "recharge-payments-orders-api-openapi.yml",
+    "recharge-payments-payment-methods-api-openapi.yml",
+    "recharge-payments-products-api-openapi.yml",
+    "recharge-payments-subscriptions-api-openapi.yml",
+    "recharge-payments-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

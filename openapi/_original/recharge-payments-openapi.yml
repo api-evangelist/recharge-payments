@@ -1,0 +1,964 @@
+openapi: 3.0.3
+info:
+  title: Recharge API
+  description: >-
+    The Recharge API is a REST API (with a few RPC-style action endpoints) for
+    building and operating subscription and recurring-billing commerce on top of
+    Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded
+    request bodies, returns JSON-encoded responses, and uses standard HTTP status
+    codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com
+    and authenticated with a store API token passed in the X-Recharge-Access-Token
+    header. The API is versioned via the X-Recharge-Version header; supported
+    versions are 2021-11 (recommended) and 2021-01. This document grounds a
+    representative subset of the public surface - Subscriptions, Customers, Orders,
+    Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook
+    endpoints. See developer.rechargepayments.com for the complete reference.
+  version: '2021-11'
+  contact:
+    name: Recharge
+    url: https://developer.rechargepayments.com
+  termsOfService: https://getrecharge.com/legal
+servers:
+  - url: https://api.rechargeapps.com
+    description: Recharge API
+security:
+  - apiToken: []
+tags:
+  - name: Subscriptions
+    description: Recurring subscription lines that drive future charges and orders.
+  - name: Customers
+    description: Customer records that own addresses, subscriptions, and payment methods.
+  - name: Orders
+    description: Orders generated from charges, plus one-time and recurring order management.
+  - name: Charges
+    description: Scheduled and processed charges against a customer's payment method.
+  - name: Products
+    description: Products and subscription rules exposed to the storefront.
+  - name: Addresses
+    description: Customer shipping addresses that group subscriptions and charges.
+  - name: Payment Methods
+    description: Tokenized payment methods used to process charges.
+  - name: Onetimes
+    description: One-time (non-recurring) products added to an upcoming charge.
+  - name: Discounts
+    description: Discount codes applied to checkouts, addresses, and charges.
+  - name: Webhooks
+    description: Webhook endpoints that receive event notifications from Recharge.
+paths:
+  /subscriptions:
+    get:
+      operationId: listSubscriptions
+      tags: [Subscriptions]
+      summary: List subscriptions
+      description: Retrieves a list of subscriptions, optionally filtered by customer, address, status, or product.
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of subscriptions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: createSubscription
+      tags: [Subscriptions]
+      summary: Create a subscription
+      description: Creates a new subscription for a customer address and payment method.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '201':
+          description: The created subscription.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /subscriptions/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getSubscription
+      tags: [Subscriptions]
+      summary: Retrieve a subscription
+      responses:
+        '200':
+          description: The requested subscription.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: '#/components/schemas/Subscription'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateSubscription
+      tags: [Subscriptions]
+      summary: Update a subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '200':
+          description: The updated subscription.
+    delete:
+      operationId: deleteSubscription
+      tags: [Subscriptions]
+      summary: Delete a subscription
+      responses:
+        '204':
+          description: The subscription was deleted.
+  /subscriptions/{id}/change_next_charge_date:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: changeNextChargeDate
+      tags: [Subscriptions]
+      summary: Change the next charge date
+      description: Sets the date of the next scheduled charge for a subscription.
+      responses:
+        '200':
+          description: The updated subscription.
+  /subscriptions/{id}/cancel:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: cancelSubscription
+      tags: [Subscriptions]
+      summary: Cancel a subscription
+      responses:
+        '200':
+          description: The cancelled subscription.
+  /subscriptions/{id}/activate:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: activateSubscription
+      tags: [Subscriptions]
+      summary: Activate a cancelled subscription
+      responses:
+        '200':
+          description: The activated subscription.
+  /customers:
+    get:
+      operationId: listCustomers
+      tags: [Customers]
+      summary: List customers
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of customers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Customer'
+    post:
+      operationId: createCustomer
+      tags: [Customers]
+      summary: Create a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: The created customer.
+  /customers/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getCustomer
+      tags: [Customers]
+      summary: Retrieve a customer
+      responses:
+        '200':
+          description: The requested customer.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer:
+                    $ref: '#/components/schemas/Customer'
+    put:
+      operationId: updateCustomer
+      tags: [Customers]
+      summary: Update a customer
+      responses:
+        '200':
+          description: The updated customer.
+    delete:
+      operationId: deleteCustomer
+      tags: [Customers]
+      summary: Delete a customer
+      responses:
+        '204':
+          description: The customer was deleted.
+  /customers/{id}/delivery_schedule:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getCustomerDeliverySchedule
+      tags: [Customers]
+      summary: Retrieve a customer delivery schedule
+      description: Returns the upcoming deliveries scheduled for a customer.
+      responses:
+        '200':
+          description: The delivery schedule.
+  /orders:
+    get:
+      operationId: listOrders
+      tags: [Orders]
+      summary: List orders
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+  /orders/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getOrder
+      tags: [Orders]
+      summary: Retrieve an order
+      responses:
+        '200':
+          description: The requested order.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order:
+                    $ref: '#/components/schemas/Order'
+    put:
+      operationId: updateOrder
+      tags: [Orders]
+      summary: Update an order
+      responses:
+        '200':
+          description: The updated order.
+    delete:
+      operationId: deleteOrder
+      tags: [Orders]
+      summary: Delete an order
+      responses:
+        '204':
+          description: The order was deleted.
+  /orders/{id}/clone:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: cloneOrder
+      tags: [Orders]
+      summary: Clone an order
+      responses:
+        '201':
+          description: The cloned order.
+  /orders/{id}/delay:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: delayOrder
+      tags: [Orders]
+      summary: Delay an order
+      responses:
+        '200':
+          description: The delayed order.
+  /charges:
+    get:
+      operationId: listCharges
+      tags: [Charges]
+      summary: List charges
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of charges.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  charges:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Charge'
+  /charges/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getCharge
+      tags: [Charges]
+      summary: Retrieve a charge
+      responses:
+        '200':
+          description: The requested charge.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  charge:
+                    $ref: '#/components/schemas/Charge'
+  /charges/{id}/skip:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: skipCharge
+      tags: [Charges]
+      summary: Skip a charge
+      description: Skips a queued charge so it will not process on its scheduled date.
+      responses:
+        '200':
+          description: The skipped charge.
+  /charges/{id}/unskip:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: unskipCharge
+      tags: [Charges]
+      summary: Unskip a charge
+      responses:
+        '200':
+          description: The unskipped charge.
+  /charges/{id}/process:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: processCharge
+      tags: [Charges]
+      summary: Process a charge
+      description: Attempts to process a queued charge immediately.
+      responses:
+        '200':
+          description: The processed charge.
+  /charges/{id}/refund:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: refundCharge
+      tags: [Charges]
+      summary: Refund a charge
+      responses:
+        '200':
+          description: The refunded charge.
+  /charges/{id}/apply_discount:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: applyDiscountToCharge
+      tags: [Charges]
+      summary: Apply a discount to a charge
+      responses:
+        '200':
+          description: The charge with the discount applied.
+  /products:
+    get:
+      operationId: listProducts
+      tags: [Products]
+      summary: List products
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+    post:
+      operationId: createProduct
+      tags: [Products]
+      summary: Create a product
+      responses:
+        '201':
+          description: The created product.
+  /products/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getProduct
+      tags: [Products]
+      summary: Retrieve a product
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product:
+                    $ref: '#/components/schemas/Product'
+    put:
+      operationId: updateProduct
+      tags: [Products]
+      summary: Update a product
+      responses:
+        '200':
+          description: The updated product.
+    delete:
+      operationId: deleteProduct
+      tags: [Products]
+      summary: Delete a product
+      responses:
+        '204':
+          description: The product was deleted.
+  /addresses:
+    get:
+      operationId: listAddresses
+      tags: [Addresses]
+      summary: List addresses
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/PageCursor'
+      responses:
+        '200':
+          description: A list of addresses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  addresses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Address'
+    post:
+      operationId: createAddress
+      tags: [Addresses]
+      summary: Create an address
+      responses:
+        '201':
+          description: The created address.
+  /addresses/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getAddress
+      tags: [Addresses]
+      summary: Retrieve an address
+      responses:
+        '200':
+          description: The requested address.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  address:
+                    $ref: '#/components/schemas/Address'
+    put:
+      operationId: updateAddress
+      tags: [Addresses]
+      summary: Update an address
+      responses:
+        '200':
+          description: The updated address.
+    delete:
+      operationId: deleteAddress
+      tags: [Addresses]
+      summary: Delete an address
+      responses:
+        '204':
+          description: The address was deleted.
+  /payment_methods:
+    get:
+      operationId: listPaymentMethods
+      tags: [Payment Methods]
+      summary: List payment methods
+      responses:
+        '200':
+          description: A list of payment methods.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment_methods:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentMethod'
+    post:
+      operationId: createPaymentMethod
+      tags: [Payment Methods]
+      summary: Create a payment method
+      responses:
+        '201':
+          description: The created payment method.
+  /payment_methods/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getPaymentMethod
+      tags: [Payment Methods]
+      summary: Retrieve a payment method
+      responses:
+        '200':
+          description: The requested payment method.
+    put:
+      operationId: updatePaymentMethod
+      tags: [Payment Methods]
+      summary: Update a payment method
+      responses:
+        '200':
+          description: The updated payment method.
+  /onetimes:
+    get:
+      operationId: listOnetimes
+      tags: [Onetimes]
+      summary: List onetimes
+      responses:
+        '200':
+          description: A list of one-time products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  onetimes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Onetime'
+    post:
+      operationId: createOnetime
+      tags: [Onetimes]
+      summary: Create a onetime
+      responses:
+        '201':
+          description: The created one-time product.
+  /onetimes/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getOnetime
+      tags: [Onetimes]
+      summary: Retrieve a onetime
+      responses:
+        '200':
+          description: The requested one-time product.
+    put:
+      operationId: updateOnetime
+      tags: [Onetimes]
+      summary: Update a onetime
+      responses:
+        '200':
+          description: The updated one-time product.
+    delete:
+      operationId: deleteOnetime
+      tags: [Onetimes]
+      summary: Delete a onetime
+      responses:
+        '204':
+          description: The one-time product was deleted.
+  /discounts:
+    get:
+      operationId: listDiscounts
+      tags: [Discounts]
+      summary: List discounts
+      responses:
+        '200':
+          description: A list of discounts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  discounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Discount'
+    post:
+      operationId: createDiscount
+      tags: [Discounts]
+      summary: Create a discount
+      responses:
+        '201':
+          description: The created discount.
+  /discounts/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getDiscount
+      tags: [Discounts]
+      summary: Retrieve a discount
+      responses:
+        '200':
+          description: The requested discount.
+    put:
+      operationId: updateDiscount
+      tags: [Discounts]
+      summary: Update a discount
+      responses:
+        '200':
+          description: The updated discount.
+    delete:
+      operationId: deleteDiscount
+      tags: [Discounts]
+      summary: Delete a discount
+      responses:
+        '204':
+          description: The discount was deleted.
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      tags: [Webhooks]
+      summary: List webhook endpoints
+      responses:
+        '200':
+          description: A list of webhook endpoints.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+    post:
+      operationId: createWebhook
+      tags: [Webhooks]
+      summary: Create a webhook endpoint
+      description: Registers a URL to receive event notifications for a set of topics.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+      responses:
+        '201':
+          description: The created webhook endpoint.
+  /webhooks/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getWebhook
+      tags: [Webhooks]
+      summary: Retrieve a webhook endpoint
+      responses:
+        '200':
+          description: The requested webhook endpoint.
+    put:
+      operationId: updateWebhook
+      tags: [Webhooks]
+      summary: Update a webhook endpoint
+      responses:
+        '200':
+          description: The updated webhook endpoint.
+    delete:
+      operationId: deleteWebhook
+      tags: [Webhooks]
+      summary: Delete a webhook endpoint
+      responses:
+        '204':
+          description: The webhook endpoint was deleted.
+  /webhooks/{id}/test:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: testWebhook
+      tags: [Webhooks]
+      summary: Test a webhook endpoint
+      description: Sends a test notification to the configured webhook URL.
+      responses:
+        '200':
+          description: The test notification was sent.
+components:
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: header
+      name: X-Recharge-Access-Token
+      description: Store API token generated in the Recharge merchant portal under Apps and integrations.
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of results per page (default 50, max 250).
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+    PageCursor:
+      name: page_info
+      in: query
+      required: false
+      description: Cursor for cursor-based pagination, taken from the Link response header.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: The API token is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
+    RateLimited:
+      description: >-
+        Too many requests. Recharge uses a leaky-bucket rate limiter (bucket of
+        40 requests, leaking 2 per second). Retry after at least 2 seconds.
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        address_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum: [active, cancelled, expired]
+        product_title:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: string
+        next_charge_scheduled_at:
+          type: string
+          format: date
+        order_interval_unit:
+          type: string
+          enum: [day, week, month]
+        order_interval_frequency:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        external_customer_id:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        charge_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        total_price:
+          type: string
+        scheduled_at:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+    Charge:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        address_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum: [success, queued, skipped, error, refunded, partially_refunded]
+        total_price:
+          type: string
+        scheduled_at:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        external_product_id:
+          type: object
+        subscription_defaults:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip:
+          type: string
+        country_code:
+          type: string
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        payment_type:
+          type: string
+        processor_name:
+          type: string
+        default:
+          type: boolean
+    Onetime:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        address_id:
+          type: integer
+          format: int64
+        product_title:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: integer
+        next_charge_scheduled_at:
+          type: string
+          format: date
+    Discount:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+        value:
+          type: string
+        value_type:
+          type: string
+          enum: [percentage, fixed_amount]
+        status:
+          type: string
+          enum: [enabled, disabled, fully_disabled]
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        address:
+          type: string
+          format: uri
+        topic:
+          type: string
+          description: The event topic, e.g. subscription/created or charge/paid.
+        created_at:
+          type: string
+          format: date-time

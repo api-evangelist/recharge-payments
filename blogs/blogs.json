@@ -2,13 +2,20 @@
   "repo": "recharge-payments",
   "feeds": [
     {
+      "source": "https://getrecharge.com/blog/feed/",
+      "feed_url": "https://getrecharge.com/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://getrecharge.com/blog/",
       "feed_url": "https://getrecharge.com/blog/feed/",
       "title": "",
-      "saved": 5,
+      "saved": 0,
       "method": "discovered"
     }
   ],
-  "post_count": 5,
-  "fetched": "2026-07-11T11:50:51Z"
+  "post_count": 13,
+  "fetched": "2026-08-01T15:49:00Z"
 }
