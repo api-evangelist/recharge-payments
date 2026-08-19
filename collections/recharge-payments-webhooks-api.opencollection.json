@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Recharge Addresses Webhooks API",
+    "version": "2021-11"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Recharge-Access-Token",
+      "value": "{{X-Recharge-Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/webhooks"
+          },
+          "docs": "List webhook endpoints"
+        },
+        {
+          "info": {
+            "name": "Create a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a URL to receive event notifications for a set of topics."
+        },
+        {
+          "info": {
+            "name": "Retrieve a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a webhook endpoint"
+        },
+        {
+          "info": {
+            "name": "Update a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rechargeapps.com/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Update a webhook endpoint"
+        },
+        {
+          "info": {
+            "name": "Delete a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rechargeapps.com/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Delete a webhook endpoint"
+        },
+        {
+          "info": {
+            "name": "Test a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/webhooks/:id/test",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Sends a test notification to the configured webhook URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

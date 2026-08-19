@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Recharge Addresses Discounts API",
+    "version": "2021-11"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Recharge-Access-Token",
+      "value": "{{X-Recharge-Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List discounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/discounts"
+          },
+          "docs": "List discounts"
+        },
+        {
+          "info": {
+            "name": "Create a discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/discounts"
+          },
+          "docs": "Create a discount"
+        },
+        {
+          "info": {
+            "name": "Retrieve a discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/discounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a discount"
+        },
+        {
+          "info": {
+            "name": "Update a discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rechargeapps.com/discounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Update a discount"
+        },
+        {
+          "info": {
+            "name": "Delete a discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rechargeapps.com/discounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Delete a discount"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

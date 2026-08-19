@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Recharge Addresses API",
+    "version": "2021-11"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Recharge-Access-Token",
+      "value": "{{X-Recharge-Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/addresses",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results per page (default 50, max 250)."
+              },
+              {
+                "name": "page_info",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for cursor-based pagination, taken from the Link response header."
+              }
+            ]
+          },
+          "docs": "List addresses"
+        },
+        {
+          "info": {
+            "name": "Create an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/addresses"
+          },
+          "docs": "Create an address"
+        },
+        {
+          "info": {
+            "name": "Retrieve an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/addresses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve an address"
+        },
+        {
+          "info": {
+            "name": "Update an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rechargeapps.com/addresses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Update an address"
+        },
+        {
+          "info": {
+            "name": "Delete an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rechargeapps.com/addresses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an address"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

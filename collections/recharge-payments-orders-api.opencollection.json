@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Recharge Addresses Orders API",
+    "version": "2021-11"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Recharge-Access-Token",
+      "value": "{{X-Recharge-Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/orders",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results per page (default 50, max 250)."
+              },
+              {
+                "name": "page_info",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for cursor-based pagination, taken from the Link response header."
+              }
+            ]
+          },
+          "docs": "List orders"
+        },
+        {
+          "info": {
+            "name": "Retrieve an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rechargeapps.com/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve an order"
+        },
+        {
+          "info": {
+            "name": "Update an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rechargeapps.com/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Update an order"
+        },
+        {
+          "info": {
+            "name": "Delete an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rechargeapps.com/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an order"
+        },
+        {
+          "info": {
+            "name": "Clone an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/orders/:id/clone",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Clone an order"
+        },
+        {
+          "info": {
+            "name": "Delay an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rechargeapps.com/orders/:id/delay",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Delay an order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

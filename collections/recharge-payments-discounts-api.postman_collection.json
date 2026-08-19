@@ -1,0 +1,438 @@
+{
+  "item": [
+    {
+      "id": "48eb6e89-4ced-4913-8328-020fb199efdd",
+      "name": "Discounts",
+      "description": {
+        "content": "Discount codes applied to checkouts, addresses, and charges.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "125a19b2-9a33-479f-a420-56b36858a5bc",
+          "name": "List discounts",
+          "request": {
+            "name": "List discounts",
+            "description": {},
+            "url": {
+              "path": [
+                "discounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f7e9e97-9cb7-49c0-89a8-37aec1edf61e",
+              "name": "A list of discounts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"discounts\": [\n    {\n      \"id\": 2982,\n      \"code\": \"string\",\n      \"value\": \"string\",\n      \"value_type\": \"percentage\",\n      \"status\": \"disabled\"\n    },\n    {\n      \"id\": 4039,\n      \"code\": \"string\",\n      \"value\": \"string\",\n      \"value_type\": \"percentage\",\n      \"status\": \"disabled\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3113787c-2959-4fce-a2fa-534963968852",
+          "name": "Create a discount",
+          "request": {
+            "name": "Create a discount",
+            "description": {},
+            "url": {
+              "path": [
+                "discounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5313ec3b-8004-4d39-9dcc-d43debde94bd",
+              "name": "The created discount.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b7c9066-b08f-4e30-b629-8fda76501590",
+          "name": "Retrieve a discount",
+          "request": {
+            "name": "Retrieve a discount",
+            "description": {},
+            "url": {
+              "path": [
+                "discounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85e11131-3a3d-4414-a733-271025694e7e",
+              "name": "The requested discount.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f814d13e-06df-42aa-bda8-46b17f2685c4",
+          "name": "Update a discount",
+          "request": {
+            "name": "Update a discount",
+            "description": {},
+            "url": {
+              "path": [
+                "discounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26f319d8-20f7-4755-adff-fe0a5b52d8bc",
+              "name": "The updated discount.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0526208-f9b8-4ca5-9f06-61a3479adc41",
+          "name": "Delete a discount",
+          "request": {
+            "name": "Delete a discount",
+            "description": {},
+            "url": {
+              "path": [
+                "discounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87288f8f-e9db-4dc9-a313-98bf02490dbc",
+              "name": "The discount was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rechargeapps.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Recharge-Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c3562c9-f726-4c3f-8c38-e4a91b299134",
+    "name": "Recharge Addresses Discounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.\n\nContact Support:\n Name: Recharge",
+      "type": "text/plain"
+    }
+  }
+}

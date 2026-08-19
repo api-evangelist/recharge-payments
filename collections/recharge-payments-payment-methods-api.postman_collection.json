@@ -1,0 +1,355 @@
+{
+  "item": [
+    {
+      "id": "9ef9ec11-1e22-4ae1-bcee-34899b4f93d7",
+      "name": "Payment Methods",
+      "description": {
+        "content": "Tokenized payment methods used to process charges.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aad3cde3-83db-4efe-9b28-0a9deb752d61",
+          "name": "List payment methods",
+          "request": {
+            "name": "List payment methods",
+            "description": {},
+            "url": {
+              "path": [
+                "payment_methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1bc4f0f-4705-44a0-a109-8b271b25a39b",
+              "name": "A list of payment methods.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payment_methods\": [\n    {\n      \"id\": 9928,\n      \"customer_id\": 9594,\n      \"payment_type\": \"string\",\n      \"processor_name\": \"string\",\n      \"default\": true\n    },\n    {\n      \"id\": 5309,\n      \"customer_id\": 9381,\n      \"payment_type\": \"string\",\n      \"processor_name\": \"string\",\n      \"default\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95577dbe-4430-47b1-9c16-f9242d346269",
+          "name": "Create a payment method",
+          "request": {
+            "name": "Create a payment method",
+            "description": {},
+            "url": {
+              "path": [
+                "payment_methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "538d80fe-17bd-4aa9-bc86-0512593ed4b3",
+              "name": "The created payment method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "790e30c4-cf85-4f35-8b53-e842d4c1fa81",
+          "name": "Retrieve a payment method",
+          "request": {
+            "name": "Retrieve a payment method",
+            "description": {},
+            "url": {
+              "path": [
+                "payment_methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a20afc43-b06e-44cd-bad2-074cf615978a",
+              "name": "The requested payment method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4022bc0b-ad4c-412c-8e4b-ed77c188fbd3",
+          "name": "Update a payment method",
+          "request": {
+            "name": "Update a payment method",
+            "description": {},
+            "url": {
+              "path": [
+                "payment_methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16299fb3-1cb0-436d-a2fb-bf2923ffceea",
+              "name": "The updated payment method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rechargeapps.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Recharge-Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fbca4fd7-510d-4982-ace9-d292cbbb6616",
+    "name": "Recharge Addresses Payment Methods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.\n\nContact Support:\n Name: Recharge",
+      "type": "text/plain"
+    }
+  }
+}

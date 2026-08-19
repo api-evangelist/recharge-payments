@@ -1,0 +1,670 @@
+{
+  "item": [
+    {
+      "id": "3331deb5-004a-4da3-b931-45f87d7520da",
+      "name": "Charges",
+      "description": {
+        "content": "Scheduled and processed charges against a customer's payment method.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2d6c15a-9a96-484c-b8fd-093988e6df92",
+          "name": "List charges",
+          "request": {
+            "name": "List charges",
+            "description": {},
+            "url": {
+              "path": [
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "The maximum number of results per page (default 50, max 250)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_info",
+                  "value": "<string>",
+                  "description": "Cursor for cursor-based pagination, taken from the Link response header."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7564900-3ed0-491a-971c-75a2b6685e32",
+              "name": "A list of charges.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page_info",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"charges\": [\n    {\n      \"id\": 380,\n      \"customer_id\": 6261,\n      \"address_id\": 6684,\n      \"status\": \"error\",\n      \"total_price\": \"string\",\n      \"scheduled_at\": \"2011-01-21\",\n      \"created_at\": \"2008-02-06T21:20:29.411Z\"\n    },\n    {\n      \"id\": 887,\n      \"customer_id\": 3991,\n      \"address_id\": 6291,\n      \"status\": \"refunded\",\n      \"total_price\": \"string\",\n      \"scheduled_at\": \"1954-05-31\",\n      \"created_at\": \"2005-01-04T02:26:44.723Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "414783b8-6b81-4410-ba43-78f2e1f08f42",
+          "name": "Retrieve a charge",
+          "request": {
+            "name": "Retrieve a charge",
+            "description": {},
+            "url": {
+              "path": [
+                "charges",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44db63aa-96d6-4687-9ba7-2fc42ea55429",
+              "name": "The requested charge.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"charge\": {\n    \"id\": 9515,\n    \"customer_id\": 9865,\n    \"address_id\": 6467,\n    \"status\": \"queued\",\n    \"total_price\": \"string\",\n    \"scheduled_at\": \"1949-01-24\",\n    \"created_at\": \"1981-01-10T08:16:27.362Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c13f0662-0330-4b26-961d-dd7b527b31b7",
+          "name": "Skip a charge",
+          "request": {
+            "name": "Skip a charge",
+            "description": {
+              "content": "Skips a queued charge so it will not process on its scheduled date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges",
+                ":id",
+                "skip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ec0ce97-58a2-4b56-87c6-a5408933e642",
+              "name": "The skipped charge.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id",
+                    "skip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d28dbd0-dfaf-4e9a-8a95-5f0b361d692d",
+          "name": "Unskip a charge",
+          "request": {
+            "name": "Unskip a charge",
+            "description": {},
+            "url": {
+              "path": [
+                "charges",
+                ":id",
+                "unskip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9f907ec-f9b0-4fed-8e3b-0390763684f6",
+              "name": "The unskipped charge.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id",
+                    "unskip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74e0a223-84d6-478c-ac6b-7bb1844989fd",
+          "name": "Process a charge",
+          "request": {
+            "name": "Process a charge",
+            "description": {
+              "content": "Attempts to process a queued charge immediately.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges",
+                ":id",
+                "process"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e241238e-4d7a-43dc-aa9d-ade35553e7a2",
+              "name": "The processed charge.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id",
+                    "process"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f97c2b12-3985-4014-9090-40f71cd200e4",
+          "name": "Refund a charge",
+          "request": {
+            "name": "Refund a charge",
+            "description": {},
+            "url": {
+              "path": [
+                "charges",
+                ":id",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ff19437-9f66-4c78-a235-6ae864671d3c",
+              "name": "The refunded charge.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fff1836-79d1-4492-bf3c-a9b7c5e9d9e7",
+          "name": "Apply a discount to a charge",
+          "request": {
+            "name": "Apply a discount to a charge",
+            "description": {},
+            "url": {
+              "path": [
+                "charges",
+                ":id",
+                "apply_discount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76551ed3-c308-4d84-9060-e425cb607e36",
+              "name": "The charge with the discount applied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id",
+                    "apply_discount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Recharge-Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rechargeapps.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Recharge-Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7a891546-ced9-41a4-aeeb-71a9851491c9",
+    "name": "Recharge Addresses Charges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.\n\nContact Support:\n Name: Recharge",
+      "type": "text/plain"
+    }
+  }
+}
