@@ -26,6 +26,13 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/recharge-payments.png
 tags:
+- Subscription
+- Recurring Billing
+- E-Commerce
+- Payments
+- Shopify
+- Retention
+tags_raw:
 - Subscriptions
 - Recurring Billing
 - E-commerce
@@ -182,6 +189,8 @@ apis:
   humanURL: https://developer.rechargepayments.com/2021-11/subscriptions
   baseURL: https://api.rechargeapps.com
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -238,6 +247,8 @@ apis:
   humanURL: https://developer.rechargepayments.com/2021-11/subscriptions
   baseURL: https://api.rechargeapps.com
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -266,6 +277,8 @@ apis:
   humanURL: https://developer.rechargepayments.com/2021-11/subscriptions
   baseURL: https://api.rechargeapps.com
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -294,6 +307,8 @@ apis:
   humanURL: https://developer.rechargepayments.com/2021-11/subscriptions
   baseURL: https://api.rechargeapps.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
