@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Recharge Addresses Subscriptions API
-  description: The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge. It has predictable, resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP status codes and verbs. All requests are made over HTTPS to https://api.rechargeapps.com and authenticated with a store API token passed in the X-Recharge-Access-Token header. The API is versioned via the X-Recharge-Version header; supported versions are 2021-11 (recommended) and 2021-01. This document grounds a representative subset of the public surface - Subscriptions, Customers, Orders, Charges, Products, Addresses, Payment Methods, Onetimes, Discounts, and Webhook endpoints. See developer.rechargepayments.com for the complete reference.
+  title: Recharge Subscriptions API
+  description: The Recharge API is a REST API (with a few RPC-style action endpoints) for building and operating subscription and recurring-billing commerce on top of Recharge.
   version: 2021-11
   contact:
     name: Recharge
@@ -145,14 +145,14 @@ paths:
         '200':
           description: The activated subscription.
 components:
-  responses:
-    RateLimited:
-      description: Too many requests. Recharge uses a leaky-bucket rate limiter (bucket of 40 requests, leaking 2 per second). Retry after at least 2 seconds.
-    Unauthorized:
-      description: The API token is missing or invalid.
-    NotFound:
-      description: The requested resource was not found.
   parameters:
+    PageCursor:
+      name: page_info
+      in: query
+      required: false
+      description: Cursor for cursor-based pagination, taken from the Link response header.
+      schema:
+        type: string
     Id:
       name: id
       in: path
@@ -161,13 +161,6 @@ components:
       schema:
         type: integer
         format: int64
-    PageCursor:
-      name: page_info
-      in: query
-      required: false
-      description: Cursor for cursor-based pagination, taken from the Link response header.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -219,6 +212,13 @@ components:
         updated_at:
           type: string
           format: date-time
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: The API token is missing or invalid.
+    RateLimited:
+      description: Too many requests. Recharge uses a leaky-bucket rate limiter (bucket of 40 requests, leaking 2 per second). Retry after at least 2 seconds.
   securitySchemes:
     apiToken:
       type: apiKey

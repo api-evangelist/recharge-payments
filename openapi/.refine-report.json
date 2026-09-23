@@ -1,16 +1,7 @@
 {
   "provider": "recharge-payments",
   "sources": [
-    "recharge-payments-addresses-api-openapi.yml",
-    "recharge-payments-charges-api-openapi.yml",
-    "recharge-payments-customers-api-openapi.yml",
-    "recharge-payments-discounts-api-openapi.yml",
-    "recharge-payments-onetimes-api-openapi.yml",
-    "recharge-payments-orders-api-openapi.yml",
-    "recharge-payments-payment-methods-api-openapi.yml",
-    "recharge-payments-products-api-openapi.yml",
-    "recharge-payments-subscriptions-api-openapi.yml",
-    "recharge-payments-webhooks-api-openapi.yml"
+    "_original/recharge-payments-openapi.yml"
   ],
   "outputs": [
     "recharge-payments-addresses-api-openapi.yml",
@@ -27,6 +18,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "recharge-payments-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "recharge-payments-addresses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-discounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-onetimes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-payment-methods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "recharge-payments-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
