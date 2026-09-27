@@ -70,6 +70,15 @@ paths:
         '204':
           description: The one-time product was deleted.
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
   schemas:
     Onetime:
       type: object
@@ -89,15 +98,6 @@ components:
         next_charge_scheduled_at:
           type: string
           format: date
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: integer
-        format: int64
   securitySchemes:
     apiToken:
       type: apiKey

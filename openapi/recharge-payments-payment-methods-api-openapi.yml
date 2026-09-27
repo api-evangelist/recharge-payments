@@ -62,15 +62,6 @@ paths:
         '200':
           description: The updated payment method.
 components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: integer
-        format: int64
   schemas:
     PaymentMethod:
       type: object
@@ -87,6 +78,15 @@ components:
           type: string
         default:
           type: boolean
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
   securitySchemes:
     apiToken:
       type: apiKey

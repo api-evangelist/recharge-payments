@@ -80,31 +80,6 @@ paths:
         '204':
           description: The address was deleted.
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: The maximum number of results per page (default 50, max 250).
-      schema:
-        type: integer
-        default: 50
-        maximum: 250
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: integer
-        format: int64
-    PageCursor:
-      name: page_info
-      in: query
-      required: false
-      description: Cursor for cursor-based pagination, taken from the Link response header.
-      schema:
-        type: string
   schemas:
     Address:
       type: object
@@ -127,6 +102,31 @@ components:
           type: string
         country_code:
           type: string
+  parameters:
+    PageCursor:
+      name: page_info
+      in: query
+      required: false
+      description: Cursor for cursor-based pagination, taken from the Link response header.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of results per page (default 50, max 250).
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
   securitySchemes:
     apiToken:
       type: apiKey

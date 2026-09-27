@@ -70,15 +70,6 @@ paths:
         '204':
           description: The discount was deleted.
 components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: integer
-        format: int64
   schemas:
     Discount:
       type: object
@@ -101,6 +92,15 @@ components:
           - enabled
           - disabled
           - fully_disabled
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
   securitySchemes:
     apiToken:
       type: apiKey

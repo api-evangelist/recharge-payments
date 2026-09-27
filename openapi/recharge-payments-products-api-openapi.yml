@@ -81,14 +81,13 @@ paths:
           description: The product was deleted.
 components:
   parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
+    PageCursor:
+      name: page_info
+      in: query
+      required: false
+      description: Cursor for cursor-based pagination, taken from the Link response header.
       schema:
-        type: integer
-        format: int64
+        type: string
     Limit:
       name: limit
       in: query
@@ -98,13 +97,14 @@ components:
         type: integer
         default: 50
         maximum: 250
-    PageCursor:
-      name: page_info
-      in: query
-      required: false
-      description: Cursor for cursor-based pagination, taken from the Link response header.
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
       schema:
-        type: string
+        type: integer
+        format: int64
   schemas:
     Product:
       type: object
