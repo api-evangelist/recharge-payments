@@ -89,15 +89,6 @@ paths:
         '200':
           description: The test notification was sent.
 components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: integer
-        format: int64
   schemas:
     Webhook:
       type: object
@@ -114,6 +105,15 @@ components:
         created_at:
           type: string
           format: date-time
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
   securitySchemes:
     apiToken:
       type: apiKey

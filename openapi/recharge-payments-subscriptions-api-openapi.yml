@@ -148,10 +148,10 @@ components:
   responses:
     RateLimited:
       description: Too many requests. Recharge uses a leaky-bucket rate limiter (bucket of 40 requests, leaking 2 per second). Retry after at least 2 seconds.
-    Unauthorized:
-      description: The API token is missing or invalid.
     NotFound:
       description: The requested resource was not found.
+    Unauthorized:
+      description: The API token is missing or invalid.
   parameters:
     Limit:
       name: limit
