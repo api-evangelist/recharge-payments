@@ -345,6 +345,9 @@ apis:
   - type: APIReference
     url: https://developer.rechargepayments.com/2021-11/webhooks_endpoints
 common:
+- type: CapabilityMap
+  url: capabilities/recharge-payments-capability-edges.yml
+  name: Recharge Business Capability Map
 - type: AgenticAccess
   url: agentic-access/recharge-payments-agentic-access.yml
 - type: TrustCenter
