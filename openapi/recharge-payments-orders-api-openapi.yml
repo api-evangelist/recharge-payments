@@ -94,29 +94,6 @@ paths:
         '200':
           description: The delayed order.
 components:
-  schemas:
-    Order:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        customer_id:
-          type: integer
-          format: int64
-        charge_id:
-          type: integer
-          format: int64
-        status:
-          type: string
-        total_price:
-          type: string
-        scheduled_at:
-          type: string
-          format: date
-        created_at:
-          type: string
-          format: date-time
   parameters:
     PageCursor:
       name: page_info
@@ -142,6 +119,29 @@ components:
         type: integer
         default: 50
         maximum: 250
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer_id:
+          type: integer
+          format: int64
+        charge_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        total_price:
+          type: string
+        scheduled_at:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
   securitySchemes:
     apiToken:
       type: apiKey

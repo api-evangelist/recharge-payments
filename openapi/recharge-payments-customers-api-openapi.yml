@@ -106,14 +106,6 @@ components:
       description: Cursor for cursor-based pagination, taken from the Link response header.
       schema:
         type: string
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: integer
-        format: int64
     Limit:
       name: limit
       in: query
@@ -123,6 +115,14 @@ components:
         type: integer
         default: 50
         maximum: 250
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
   schemas:
     Customer:
       type: object

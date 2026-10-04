@@ -145,13 +145,6 @@ paths:
         '200':
           description: The activated subscription.
 components:
-  responses:
-    RateLimited:
-      description: Too many requests. Recharge uses a leaky-bucket rate limiter (bucket of 40 requests, leaking 2 per second). Retry after at least 2 seconds.
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: The API token is missing or invalid.
   parameters:
     Limit:
       name: limit
@@ -162,13 +155,6 @@ components:
         type: integer
         default: 50
         maximum: 250
-    PageCursor:
-      name: page_info
-      in: query
-      required: false
-      description: Cursor for cursor-based pagination, taken from the Link response header.
-      schema:
-        type: string
     Id:
       name: id
       in: path
@@ -177,6 +163,20 @@ components:
       schema:
         type: integer
         format: int64
+    PageCursor:
+      name: page_info
+      in: query
+      required: false
+      description: Cursor for cursor-based pagination, taken from the Link response header.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: The API token is missing or invalid.
+    RateLimited:
+      description: Too many requests. Recharge uses a leaky-bucket rate limiter (bucket of 40 requests, leaking 2 per second). Retry after at least 2 seconds.
+    NotFound:
+      description: The requested resource was not found.
   schemas:
     Subscription:
       type: object
