@@ -1,0 +1,658 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/recharge/integrations
+checked:
+- https://composio.dev/toolkits/recharge-payments
+- https://monid.ai/tools/recharge-payments
+- https://n8n.io/integrations/recharge-payments/
+- https://zapier.com/apps/recharge-payments/integrations
+- https://zapier.com/apps/recharge/integrations
+summary: null
+marketplace_apps:
+- marketplace: zapier
+  channel: ipaas-listing
+  app: recharge
+  url: https://zapier.com/apps/recharge/integrations
+  external_url: https://getrecharge.com/ecommerce/shopify-subscriptions/
+  partner_tier: SILVER
+  triggers:
+  - key: activated_subscription
+    label: New Reactivated Subscription
+  - key: address_created
+    label: New Address Created
+  - key: address_updated
+    label: Address Updated
+  - key: cancelled_subscription
+    label: New Cancelled Subscription
+  - key: charge_created
+    label: New Charge Created
+  - key: charge_failed
+    label: Charge Failed
+  - key: charge_max_retries_reached
+    label: Charge Max Retries Reached
+  - key: charge_paid
+    label: Charge Paid
+  - key: charge_refunded
+    label: Charge Refunded
+  - key: charge_upcoming
+    label: Charge Upcoming
+  - key: charge_updated
+    label: Charge Updated
+  - key: checkout_completed
+    label: Checkout Completed
+  - key: checkout_created
+    label: Checkout Created
+  - key: checkout_processed
+    label: Checkout Processed
+  - key: checkout_updated
+    label: Checkout Updated
+  - key: customer
+    label: New Customer
+  - key: customer_payment_method_updated
+    label: Customer Payment Method Updated
+  - key: customer_status_change
+    label: Customer Status Change
+  - key: customer_updated
+    label: Customer Updated
+  - key: onetime_created
+    label: Onetime Created
+  - key: onetime_deleted
+    label: Onetime Deleted
+  - key: onetime_updated
+    label: Onetime Updated
+  - key: order
+    label: New Order
+  - key: order_cancelled
+    label: Order Cancelled
+  - key: order_created
+    label: Order Created
+  - key: order_deleted
+    label: Order Deleted
+  - key: order_processed
+    label: Order Processed
+  - key: order_upcoming
+    label: Order Upcoming
+  - key: order_updated
+    label: Order Updated
+  - key: product_created
+    label: New Product Created
+  - key: product_deleted
+    label: Product Deleted
+  - key: product_updated
+    label: Product Updated
+  - key: subscription
+    label: New Subscription
+  - key: subscription_deleted
+    label: Subscription Deleted
+  - key: subscription_paused
+    label: Subscription Paused
+  - key: subscription_skipped
+    label: Subscription Skipped
+  - key: subscription_swapped
+    label: Subscription Product Swapped
+  - key: subscription_unskipped
+    label: Subscription Unskipped
+  - key: subscription_updated
+    label: Subscription Updated
+  actions:
+  - key: activate_subscription
+    label: Activate Subscription
+  - key: add_collection_product
+    label: Add Products to Collection
+  - key: add_discounts_to_address
+    label: Add Discounts to Address
+  - key: add_discount_to_charge
+    label: Add Discount to Charge
+  - key: cancel_subscription
+    label: Cancel Subscription
+  - key: change_next_charge_date
+    label: Change Next Charge Date
+  - key: change_subscription_address
+    label: Change Subscription Address
+  - key: clone_order
+    label: Clone Order
+  - key: count_addresses
+    label: Count Addresses
+  - key: count_charges
+    label: Count Charges
+  - key: count_customers
+    label: Count Customers
+  - key: count_orders
+    label: Count Orders
+  - key: count_products
+    label: Count Products
+  - key: count_subscriptions
+    label: Count Subscriptions
+  - key: create_address
+    label: Create Address
+  - key: create_checkout
+    label: Create Checkout
+  - key: create_collection
+    label: Create Collection
+  - key: create_customer
+    label: Create Customer
+  - key: create_discount_codes
+    label: Create Discount Codes
+  - key: create_metafield
+    label: Create Metafield
+  - key: create_onetime
+    label: Create One Time Charge
+  - key: create_plan
+    label: Create Plan
+  - key: create_product
+    label: Create Product
+  - key: create_subscription
+    label: Create Subscription
+  - key: delay_order
+    label: Delay Order
+  - key: delete_address
+    label: Delete Address
+  - key: delete_collection
+    label: Delete Collection
+  - key: delete_collection_product
+    label: Remove Product From Collection
+  - key: delete_customer
+    label: Delete Customer
+  - key: delete_metafield
+    label: Delete Metafield
+  - key: delete_onetime_charge
+    label: Delete One Time Charge
+  - key: delete_order
+    label: Delete Order
+  - key: delete_plan
+    label: Delete Plan
+  - key: delete_product
+    label: Delete Product
+  - key: delete_subscription
+    label: Delete Subscription
+  - key: get_metafield
+    label: Get Metafield
+  - key: get_shop
+    label: Get Shop
+  - key: list_addresses
+    label: List Addresses
+  - key: list_bundle_selections
+    label: List Bundle Selections
+  - key: list_charges
+    label: List Charges
+  - key: list_collections
+    label: List Collections
+  - key: list_collection_products
+    label: List Collection Products
+  - key: list_customers
+    label: List Customers
+  - key: list_metafields
+    label: List Metafields
+  - key: list_onetimes
+    label: List One-Time Charges
+  - key: list_orders
+    label: List Orders
+  - key: list_payment_methods
+    label: List Payment Methods
+  - key: list_plans
+    label: List Plans
+  - key: list_products
+    label: List Products
+  - key: list_shipping_countries
+    label: List Shipping Countries
+  - key: list_subscriptions
+    label: List Subscriptions
+  - key: process_charge
+    label: Process Charge
+  - key: process_checkout
+    label: Process Checkout
+  - key: reactivate_subscription
+    label: Reactivate Subscription
+  - key: remove_discount_from_address
+    label: Remove Discount From Address
+  - key: remove_discount_from_charge
+    label: Remove Discount From Charge
+  - key: retrieve_address
+    label: Retrieve Address
+  - key: retrieve_checkout
+    label: Retrieve Checkout
+  - key: retrieve_collection
+    label: Retrieve Collection
+  - key: retrieve_customer
+    label: Retrieve Customer
+  - key: retrieve_discount
+    label: Retrieve Discount
+  - key: retrieve_onetime
+    label: Retrieve One-Time Charge
+  - key: retrieve_order
+    label: Retrieve Order
+  - key: retrieve_product
+    label: Retrieve Product
+  - key: retrieve_shipping_rates
+    label: Retrieve Shipping Rates
+  - key: retrieve_store
+    label: Retrieve Store
+  - key: send_email_notification
+    label: Send Email Notification
+  - key: skip_charge
+    label: Skip Charge
+  - key: unskip_charge
+    label: Unskip Charge
+  - key: update_address
+    label: Update Address
+  - key: update_checkout
+    label: Update Checkout
+  - key: update_collection
+    label: Update Collection
+  - key: update_customer
+    label: Update Customer
+  - key: update_metafield
+    label: Update Metafield
+  - key: update_onetime
+    label: Update One-Time Charge
+  - key: update_order_line_items
+    label: Update Order Line Items
+  - key: update_plan
+    label: Update Plan
+  - key: update_product
+    label: Update Product
+  - key: update_subscription
+    label: Update Subscription
+  searches:
+  - key: find_address
+    label: Find an Address
+  - key: find_charge
+    label: Find a Charge
+  - key: find_customer
+    label: Find Customer
+  - key: find_subscription
+    label: Find a Subscription
+edges:
+- partner_name: Shopify
+  partner: shopify
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/shopify
+  direction: third-party
+  category: eCommerce
+  partner_url: https://www.shopify.com/
+- partner_name: Mailchimp
+  partner: mailchimp
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/mailchimp
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://mailchimp.com/
+- partner_name: HubSpot
+  partner: hubspot
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/hubspot
+  direction: third-party
+  category: Marketing Automation
+  partner_url: http://www.hubspot.com/
+- partner_name: ActiveCampaign
+  partner: activecampaign
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/activecampaign
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.activecampaign.com/?utm_source=unpaid_syndication_website&utm_medium=referral&utm_campaign=zapier_listing
+- partner_name: Uscreen
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/uscreen
+  direction: third-party
+  category: Video & Audio
+  partner_url: https://uscreen.tv/
+- partner_name: Gmail
+  partner: gmail
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/gmail
+  direction: third-party
+  category: Email
+  partner_url: https://mail.google.com/
+- partner_name: Typeform
+  partner: typeform
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/typeform
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: https://www.typeform.com/signup?utm_medium=referral&utm_source=zapier&utm_campaign=zapier_integration&utm_content=marketplace
+- partner_name: Google Sheets
+  partner: google-sheets
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/google-sheets
+  direction: third-party
+  category: Google
+  partner_url: http://sheets.google.com/
+- partner_name: WooCommerce
+  partner: woocommerce
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/woocommerce
+  direction: third-party
+  category: eCommerce
+  partner_url: https://woocommerce.com/products/woocommerce-zapier/?utm_source=zapier&utm_medium=website&utm_campaign=integration
+- partner_name: Thinkific
+  partner: thinkific
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/thinkific
+  direction: third-party
+  category: Online Courses
+  partner_url: http://www.thinkific.com/
+- partner_name: Intercom
+  partner: intercom
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/intercom
+  direction: third-party
+  category: Customer Support
+  partner_url: https://www.intercom.com/welcome-to-intercom?utm_source=external-website&utm_medium=partner&utm_campaign=20220503_all_oc_all_global_gl_all_all_par_extmktplc&utm_term=zapier
+- partner_name: Skool
+  partner: skool
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/skool
+  direction: third-party
+  category: Education
+  partner_url: https://skool.com/
+- partner_name: Klaviyo
+  partner: klaviyo
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/klaviyo
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.klaviyo.com/
+- partner_name: PDF.co
+  partner: pdf-co
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/pdfco
+  direction: third-party
+  category: Documents
+  partner_url: https://pdf.co/integrations/zapier?utm_source=zapier&utm_medium=app_page&utm_content=learn_more
+- partner_name: Customer.io
+  partner: customer-io
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/customerio
+  direction: third-party
+  category: Email
+  partner_url: https://customer.io/?utm_source=zapier.com&utm_medium=referral&utm_campaign=zapier-landing-page
+- partner_name: Discord
+  partner: discord
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/discord
+  direction: third-party
+  category: Team Chat
+  partner_url: https://discordapp.com/
+- partner_name: Manychat
+  partner: manychat
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/manychat
+  direction: third-party
+  category: Social Media Marketing
+  partner_url: https://manychat.com/
+- partner_name: ClickFunnels
+  partner: clickfunnels
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/clickfunnels
+  direction: third-party
+  category: Website & App Building
+  partner_url: https://help.myclickfunnels.com/hc/en-us/articles/9655675588119-ClickFunnels-FAQs
+- partner_name: SQL Server
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/sql-server
+  direction: third-party
+  category: Databases
+  partner_url: https://www.microsoft.com/sql-server
+- partner_name: PayPal
+  partner: paypal
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/paypal
+  direction: third-party
+  category: Payment Processing
+  partner_url: https://www.paypal.com/
+- partner_name: Stripe
+  partner: stripe
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/stripe
+  direction: third-party
+  category: Payment Processing
+  partner_url: https://stripe.com/
+- partner_name: Gorgias
+  partner: gorgias
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/gorgias
+  direction: third-party
+  category: Customer Support
+  partner_url: https://www.gorgias.com/
+- partner_name: Twilio
+  partner: twilio
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/twilio
+  direction: third-party
+  category: Phone & SMS
+  partner_url: https://www.twilio.com/
+- partner_name: SalesScreen
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/salesscreen
+  direction: third-party
+  category: Dashboards
+  partner_url: https://www.salesscreen.com/
+- partner_name: Xero
+  partner: xero
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/xero
+  direction: third-party
+  category: Accounting
+  partner_url: https://xero5440.partnerlinks.io/uvwuuwrxyoi8
+- partner_name: LearnDash
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/learndash
+  direction: third-party
+  category: Online Courses
+  partner_url: https://www.learndash.com/
+- partner_name: Adalo
+  partner: adalo
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/adalo
+  direction: third-party
+  category: App Builder
+  partner_url: https://www.adalo.com/?utm_campaign=zapier_profile
+- partner_name: Skipio
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/skipio
+  direction: third-party
+  category: Marketing
+  partner_url: https://skipio.com/
+- partner_name: Databox
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/databox
+  direction: third-party
+  category: Business Intelligence
+  partner_url: https://databox.com/pricing
+- partner_name: Refersion
+  partner: refersion
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/recharge/integrations/refersion
+  direction: third-party
+  category: eCommerce
+  partner_url: https://www.refersion.com/
+templates:
+- title: Post new cancelled ReCharge subscriptions as Slack channel messages
+  url: https://zapier.com/apps/recharge/integrations/slack/26986/post-new-cancelled-recharge-subscriptions-as-slack-channel-messages
+  apps:
+  - recharge
+  - slack
+- title: Add new ReCharge customers as new Google Sheets spreadsheet rows
+  url: https://zapier.com/apps/google-sheets/integrations/recharge/26993/add-new-recharge-customers-as-new-google-sheets-spreadsheet-rows
+  apps:
+  - recharge
+  - google-sheets
+- title: Add new cancelled ReCharge subscriptions as new Google Sheets spreadsheet rows
+  url: https://zapier.com/apps/google-sheets/integrations/recharge/26991/add-new-cancelled-recharge-subscriptions-as-new-google-sheets-spreadsheet-rows
+  apps:
+  - recharge
+  - google-sheets
+- title: Post about new ReCharge customers as Slack channel messages
+  url: https://zapier.com/apps/recharge/integrations/slack/26987/post-about-new-recharge-customers-as-slack-channel-messages
+  apps:
+  - recharge
+  - slack
+- title: Send Slack messages for new orders in ReCharge
+  url: https://zapier.com/apps/recharge/integrations/slack/1608483/send-slack-messages-for-new-orders-in-recharge
+  apps:
+  - recharge
+  - slack
+- title: Update new cancelled ReCharge subscriptions as Mailchimp subscribers
+  url: https://zapier.com/apps/mailchimp/integrations/recharge/26988/update-new-cancelled-recharge-subscriptions-as-mailchimp-subscribers
+  apps:
+  - recharge
+  - mailchimp
+- title: Add or update new reactivated ReCharge subscriptions as Mailchimp subscribers
+  url: https://zapier.com/apps/mailchimp/integrations/recharge/26989/add-or-update-new-reactivated-recharge-subscriptions-as-mailchimp-subscribers
+  apps:
+  - recharge
+  - mailchimp
+- title: Send customers who cancel ReCharge subscriptions Mailchimp campaigns
+  url: https://zapier.com/apps/mailchimp/integrations/recharge/26990/send-customers-who-cancel-recharge-subscriptions-mailchimp-campaigns
+  apps:
+  - recharge
+  - mailchimp
+- title: Add new reactivated ReCharge subscriptions as new Google Sheets spreadsheet rows
+  url: https://zapier.com/apps/google-sheets/integrations/recharge/26992/add-new-reactivated-recharge-subscriptions-as-new-google-sheets-spreadsheet-rows
+  apps:
+  - recharge
+  - google-sheets
+- title: Add new ReCharge subscriptions as new tags in Kit for newly purchased subscriptions in ReCharge
+  url: https://zapier.com/apps/kit/integrations/recharge/26994/add-new-recharge-subscriptions-as-new-tags-in-kit-for-newly-purchased-subscriptions-in-recharge
+  apps:
+  - recharge
+  - kit
+- title: Add new cancelled ReCharge subscriptions as new Kit tags
+  url: https://zapier.com/apps/kit/integrations/recharge/26996/add-new-cancelled-recharge-subscriptions-as-new-kit-tags
+  apps:
+  - recharge
+  - kit
+- title: Add reactivated ReCharge subscriptions as new tags in Kit
+  url: https://zapier.com/apps/kit/integrations/recharge/26997/add-reactivated-recharge-subscriptions-as-new-tags-in-kit
+  apps:
+  - recharge
+  - kit
+template_total: 105
