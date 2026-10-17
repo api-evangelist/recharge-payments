@@ -99,6 +99,14 @@ paths:
           description: The delivery schedule.
 components:
   parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: integer
+        format: int64
     PageCursor:
       name: page_info
       in: query
@@ -115,14 +123,6 @@ components:
         type: integer
         default: 50
         maximum: 250
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: integer
-        format: int64
   schemas:
     Customer:
       type: object
