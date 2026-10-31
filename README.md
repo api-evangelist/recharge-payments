@@ -1,4 +1,4 @@
-# Recharge (recharge-payments)
+# Recharge
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,169 +64,137 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Recharge (Recharge Payments) is a subscription and recurring-billing platform for e-commerce, most widely used on Shopify (with BigCommerce and custom-store support). Its public REST API at `https://api.rechargeapps.com` lets developers manage the full subscription lifecycle programmatically - subscriptions, customers, addresses, charges, orders, products, payment methods, onetimes, discounts, and webhook endpoints. The API is resource-oriented JSON over HTTPS, with cursor-based pagination and a leaky-bucket rate limiter.
+Recharge (Recharge Payments) is a subscription and recurring-billing platform for e-commerce, most widely used on Shopify. Its public REST API at https://api.rechargeapps.com lets developers manage the full subscription lifecycle - subscriptions, customers, addresses, charges, orders, products, payment methods, onetimes, discounts, and webhooks - programmatically. Requests are authenticated with a store API token in the X-Recharge-Access-Token header and versioned via the X-Recharge-Version header (supported versions 2021-11 and 2021-01). The API is resource-oriented JSON over HTTPS with cursor-based pagination and a leaky-bucket rate limiter.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/recharge-payments/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/recharge-payments/refs/heads/main/apis.yml)
+**Areas:** Subscription · Recurring Billing · E-Commerce · Payments · Shopify · Retention
 
-## Access Model and Authentication
+## Recharge on APIs.io
 
-The Recharge API is a **merchant API, not an open/anonymous API**. Using it requires a Recharge merchant account on a paid plan (Starter, Plus, or Custom), typically connected to a Shopify store. However, the full API reference documentation is public at [developer.rechargepayments.com](https://developer.rechargepayments.com).
+Everything profiled for Recharge is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/recharge-payments/](https://apis.io/providers/recharge-payments/)** — or go straight to one of the APIs or properties below.
 
-- **Auth:** a store **API token** passed in the `X-Recharge-Access-Token` header. Tokens are generated per store in the merchant portal (Apps and integrations) and scoped to specific resource permissions. Public/partner apps use OAuth to obtain per-store tokens.
-- **Versioning:** the `X-Recharge-Version` header selects the API version. Supported versions are **`2021-11`** (recommended) and **`2021-01`**; if omitted, the account default is used.
-- **Transport:** all requests are made over HTTPS to `https://api.rechargeapps.com`. Responses are JSON.
-- **Rate limits:** a leaky-bucket limiter with a bucket of **40 requests** that leaks **2 requests/second**; overflow returns HTTP `429` (sleep at least 2 seconds and retry).
-- **Events:** near-real-time notifications are delivered via **outbound webhooks** (server-to-endpoint HTTPS POST). There is **no public WebSocket API**.
+### APIs (10)
 
-## Tags
+- [Recharge Addresses API](https://apis.io/apis/recharge-payments/recharge-payments-addresses-api/) — Customer shipping addresses that group subscriptions and charges.
+- [Recharge Charges API](https://apis.io/apis/recharge-payments/recharge-payments-charges-api/) — Scheduled and processed charges against a customer's payment method.
+- [Recharge Customers API](https://apis.io/apis/recharge-payments/recharge-payments-customers-api/) — Customer records that own addresses, subscriptions, and payment methods.
+- [Recharge Discounts API](https://apis.io/apis/recharge-payments/recharge-payments-discounts-api/) — Discount codes applied to checkouts, addresses, and charges.
+- [Recharge Onetimes API](https://apis.io/apis/recharge-payments/recharge-payments-onetimes-api/) — One-time (non-recurring) products added to an upcoming charge.
+- [Recharge Orders API](https://apis.io/apis/recharge-payments/recharge-payments-orders-api/) — Orders generated from charges, plus one-time and recurring order management.
+- [Recharge Payment Methods API](https://apis.io/apis/recharge-payments/recharge-payments-payment-methods-api/) — Tokenized payment methods used to process charges.
+- [Recharge Products API](https://apis.io/apis/recharge-payments/recharge-payments-products-api/) — Products and subscription rules exposed to the storefront.
+- [Recharge Subscriptions API](https://apis.io/apis/recharge-payments/recharge-payments-subscriptions-api/) — Recurring subscription lines that drive future charges and orders.
+- [Recharge Webhooks API](https://apis.io/apis/recharge-payments/recharge-payments-webhooks-api/) — Webhook endpoints that receive event notifications from Recharge.
 
-- Subscriptions
-- Recurring Billing
-- E-commerce
-- Payments
-- Shopify
-- Retention
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-10
-- **Modified:** 2026-07-10
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Recharge Subscriptions API
+- [Recharge Payments Agentic Access](https://apis.io/agentic-access/recharge-payments/recharge-payments-agentic-access/)
 
-Create, list, retrieve, update, and delete recurring subscriptions, and drive the subscription lifecycle with action endpoints - change the next charge date, change address, cancel, and activate. Subscriptions define product, quantity, price, and order interval, and schedule the charges that generate future orders.
+#### Collections (11)
 
-- **Human URL:** [https://developer.rechargepayments.com/2021-11/subscriptions](https://developer.rechargepayments.com/2021-11/subscriptions)
-- **Base URL:** `https://api.rechargeapps.com`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Recharge API](https://apis.io/collections/recharge-payments/open-recharge-payments/)
+- [Recharge Addresses API](https://apis.io/collections/recharge-payments/open-recharge-payments-addresses-api/)
+- [Recharge Addresses Charges API](https://apis.io/collections/recharge-payments/open-recharge-payments-charges-api/)
+- [Recharge Addresses Customers API](https://apis.io/collections/recharge-payments/open-recharge-payments-customers-api/)
+- [Recharge Addresses Discounts API](https://apis.io/collections/recharge-payments/open-recharge-payments-discounts-api/)
+- [Recharge Addresses Onetimes API](https://apis.io/collections/recharge-payments/open-recharge-payments-onetimes-api/)
+- [Recharge Addresses Orders API](https://apis.io/collections/recharge-payments/open-recharge-payments-orders-api/)
+- [Recharge Addresses Payment Methods API](https://apis.io/collections/recharge-payments/open-recharge-payments-payment-methods-api/)
+- [Recharge Addresses Products API](https://apis.io/collections/recharge-payments/open-recharge-payments-products-api/)
+- [Recharge Addresses Subscriptions API](https://apis.io/collections/recharge-payments/open-recharge-payments-subscriptions-api/)
+- [Recharge Addresses Webhooks API](https://apis.io/collections/recharge-payments/open-recharge-payments-webhooks-api/)
 
-- Subscriptions
-- Recurring Billing
-- Lifecycle
+#### Security (3)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://developer.rechargepayments.com/2021-11)
-- [API Reference](https://developer.rechargepayments.com/2021-11/subscriptions)
-- [OpenAPI](openapi/recharge-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/recharge-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/recharge-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Recharge Payments Authentication](https://apis.io/security/recharge-payments/recharge-payments-authentication/)
+- [Recharge Payments Domain Security](https://apis.io/security/recharge-payments/recharge-payments-domain-security/)
+- [Recharge Payments Trust Center](https://apis.io/security/recharge-payments/recharge-payments-trust-center/)
 
-### Recharge Customers API
+#### Plans and pricing (1)
 
-Manage customer records that own addresses, subscriptions, and payment methods - create, list, retrieve, update, and delete customers, and read a customer's upcoming delivery schedule and credit summary. Customers link Recharge records to the underlying store's external customer identifier.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://developer.rechargepayments.com/2021-11/customers](https://developer.rechargepayments.com/2021-11/customers)
-- **Base URL:** `https://api.rechargeapps.com`
+- [Recharge Payments Plans Pricing](https://apis.io/plans/recharge-payments/recharge-payments-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Customers
-- Accounts
-- Delivery Schedule
+Published request limits.
 
-#### Properties
+- [Recharge Payments Rate Limits](https://apis.io/rate-limits/recharge-payments/recharge-payments-rate-limits/)
 
-- [API Reference](https://developer.rechargepayments.com/2021-11/customers)
-- [OpenAPI](openapi/recharge-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/recharge-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/recharge-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### FinOps (1)
 
-### Recharge Orders API
+What the API costs to run, by operation.
 
-List, retrieve, update, and delete orders generated from charges, plus RPC-style actions to clone an order or delay it. Orders represent the concrete fulfillment record that flows to the connected storefront after a charge processes successfully.
+- [Recharge Payments Finops](https://apis.io/finops/recharge-payments/recharge-payments-finops/)
 
-- **Human URL:** [https://developer.rechargepayments.com/2021-11/orders](https://developer.rechargepayments.com/2021-11/orders)
-- **Base URL:** `https://api.rechargeapps.com`
+## Where to find this API
 
-#### Tags
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- Orders
-- Fulfillment
-- Recurring
-
-#### Properties
-
-- [API Reference](https://developer.rechargepayments.com/2021-11/orders)
-- [OpenAPI](openapi/recharge-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/recharge-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/recharge-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Recharge Charges API
-
-List and retrieve scheduled and processed charges, and act on queued charges - skip, unskip, process now, refund, and apply or remove a discount. Charges are the billing events that draw against a customer's payment method and produce orders on success.
-
-- **Human URL:** [https://developer.rechargepayments.com/2021-11/charges](https://developer.rechargepayments.com/2021-11/charges)
-- **Base URL:** `https://api.rechargeapps.com`
-
-#### Tags
-
-- Charges
-- Billing
-- Payments
-
-#### Properties
-
-- [API Reference](https://developer.rechargepayments.com/2021-11/charges)
-- [OpenAPI](openapi/recharge-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/recharge-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/recharge-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Recharge Products API
-
-Create, list, retrieve, update, and delete products and their subscription defaults - the discount, order-interval, and cutoff rules that govern how a storefront product can be subscribed to. Products map to the connected store's external product identifiers.
-
-- **Human URL:** [https://developer.rechargepayments.com/2021-11/products](https://developer.rechargepayments.com/2021-11/products)
-- **Base URL:** `https://api.rechargeapps.com`
-
-#### Tags
-
-- Products
-- Catalog
-- Subscription Rules
-
-#### Properties
-
-- [API Reference](https://developer.rechargepayments.com/2021-11/products)
-- [OpenAPI](openapi/recharge-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/recharge-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/recharge-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Recharge Webhooks API
-
-Register, list, retrieve, update, delete, and test webhook endpoints that receive event notifications - for topics such as subscription, charge, order, and customer changes - via server-to-endpoint HTTPS POST. Webhooks are Recharge's push mechanism; there is no public WebSocket surface.
-
-- **Human URL:** [https://developer.rechargepayments.com/2021-11/webhooks_endpoints](https://developer.rechargepayments.com/2021-11/webhooks_endpoints)
-- **Base URL:** `https://api.rechargeapps.com`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [API Reference](https://developer.rechargepayments.com/2021-11/webhooks_endpoints)
-- [OpenAPI](openapi/recharge-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/recharge-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/recharge-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/ReChargePayments)
-- [LinkedIn](https://www.linkedin.com/company/rechargepayments)
 - [Website](https://getrecharge.com)
 - [Documentation](https://developer.rechargepayments.com)
-- [Plans](plans/recharge-payments-plans-pricing.yml)
-- [Rate Limits](rate-limits/recharge-payments-rate-limits.yml)
-- [Fin Ops](finops/recharge-payments-finops.yml)
 - [Blog](https://getrecharge.com/blog/)
+- [GitHub](https://github.com/ReChargePayments)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 47.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 15.5 |
+| Access clarity | 15.8 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/recharge-payments/](https://apis.io/providers/recharge-payments/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Recharge: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/recharge-payments/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
